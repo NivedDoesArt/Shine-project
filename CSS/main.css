@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Teko:wght@300..700&display=swap');
+
+html,
+* {
+    padding: 0px;
+    margin: 0px;
+
+    font-family: "Quicksand", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+
+header {
+    width: calc(100% - 2vw);
+    height: 80px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #335;
+    color: #4af;
+}
+
+header p, header ul li {
+    font-family: "Teko", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 2.5rem;
+    float: left;
+
+}
+
+#siteNameHolder {
+    display: flex;
+    align-items: center;
+    margin-left: 5vw;
+    padding-right: 25px;
+
+    cursor: pointer;
+    border-radius: 100px;
+    user-select: none;
+
+    transition: all 0.2s;
+}
+
+#siteNameHolder p {
+    padding-left: 10px;
+}
+
+#siteNameHolder:hover {
+    transform: translateY(-4px);
+    background-color: #aaf1;
+    box-shadow: #0002 0px 4px 0px 0px;
+}
+
+#siteNameHolder:active {
+    transform: translateY(-2px) !important;
+    box-shadow: #0002 0px 2px 0px 0px !important;
+}
+
+#siteLogo {
+    width: 57px;
+    height: 57px;
+    float: left;
+
+    background-color: #4af;
+    border-radius: 50%;
+}
+
+#navigation {
+    margin-right: 5vw;
+}
+
+#navigation li {
+    list-style: none;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    cursor: pointer;
+    border-radius: 100px;
+    user-select: none;
+
+    transition: all 0.2s;
+}
+
+#navigation li:hover {
+    transform: translateY(-4px);
+    background-color: #aaf1;
+    box-shadow: #0002 0px 4px 0px 0px;
+}
+
+#navigation li:active {
+    transform: translateY(-2px) !important;
+    box-shadow: #0002 0px 2px 0px 0px !important;
+}
+
+#activePage {
+    background-color: #6bf !important;
+    border-radius: 100px;
+    color: #335;
+    box-shadow: #6bfa 0px 0px 0px 0px !important;
+}
+
+#activePage:hover {
+    transform: translateY(-4px);
+    box-shadow: #6bfa 0px 4px 0px 0px !important;
+}
+
+#activePage:active {
+    transform: translateY(-2px) !important;
+    box-shadow: #6bfa 0px 2px 0px 0px !important;
+}
+
+
+
+#content {
+    min-height: calc(100vh - 80px);
+}
+
+
+
+footer {
+    width: 100%;
+    min-height: 50vh;
+
+    background-color: #335;
+}
+
+#meBio img {
+    width: calc(150px + 10vw);
+    margin-top: 50px;
+    margin-left: calc(50px + 5vw);
+
+    border-radius: 10px;
+}
