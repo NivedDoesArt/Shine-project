@@ -44,6 +44,7 @@ header p, header ul li {
     cursor: pointer;
     border-radius: 100px;
     user-select: none;
+    box-shadow: #0002 0px 0px 0px 0px;
 
     transition: all 0.2s;
 }
@@ -86,6 +87,7 @@ header p, header ul li {
     cursor: pointer;
     border-radius: 100px;
     user-select: none;
+    box-shadow: #0002 0px 0px 0px 0px;
 
     transition: all 0.2s;
 }
@@ -129,14 +131,73 @@ header p, header ul li {
 footer {
     width: 100%;
     min-height: 50vh;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
     background-color: #335;
 }
 
-#meBio img {
-    width: calc(150px + 10vw);
-    margin-top: 50px;
-    margin-left: calc(50px + 5vw);
+#meBio {
+    width: fit-content;
 
     border-radius: 10px;
+}
+
+#meBio img {
+    width: calc(150px + 10vw + 20px);
+
+    border-radius: 10px;
+}
+
+#meBio p {
+    width: calc(150px + 10vw);
+    padding: 10px;
+
+    color: #fff;
+    text-align: justify;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+footer ul {
+    width: calc(150px + 10vw) !important;
+    text-align: center;
+}
+
+footer ul p {
+    padding: 10px;
+
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+footer ul li {
+    width: fit-content;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: inline-block;
+
+    color: #fff;
+    text-align: justify;
+    font-weight: 300;
+    font-size: 1.2rem;
+    list-style: none;
+    text-align: center;
+    box-shadow: inset #fff 0px 0px 0px 1px;
+    border-radius: 100px;
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+footer ul li:hover {
+    background-color: #fff2 !important;
 }
