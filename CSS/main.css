@@ -11,6 +11,12 @@ html,
     font-style: normal;
 }
 
+#body {
+    opacity: 0%;
+
+    transition: opacity 0.5s;
+}
+
 
 
 header {
@@ -135,7 +141,6 @@ footer {
     padding-bottom: 50px;
     display: flex;
     justify-content: space-around;
-    align-items: center;
 
     background-color: #335;
 }
@@ -164,6 +169,7 @@ footer {
 
 footer ul {
     width: calc(150px + 10vw) !important;
+    padding-top: 100px;
     text-align: center;
 }
 

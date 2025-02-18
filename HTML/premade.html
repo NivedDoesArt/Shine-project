@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tab writer | Home</title>
+    <title>Tab writer | Pre-made</title>
 
     <link rel="stylesheet" href="../CSS/main.css">
 </head>
 
-<body>
+<body id="body">
     <header>
-        <div onclick="window.location.href = '../index.html'" id="siteNameHolder">
+        <div onclick="navbar('../index.html');" id="siteNameHolder">
             <div id="siteLogo"></div>
             <p>Tab writer</p>
         </div>
 
         <ul id="navigation">
-            <li onclick="window.location.href = '../index.html'">Create</li>
-            <li onclick="window.location.href = '../HTML/premade.html'" id="activePage">Pre-made</li>
-            <li onclick="window.location.href = '../HTML/contact.html'">Contact</li>
+            <li onclick="navbar('../index.html');">Create</li>
+            <li onclick="window.scrollTo({top: 0, behavior:'smooth'})" id="activePage">Pre-made</li>
+            <li onclick="navbar('../HTML/contact.html');">Contact</li>
         </ul>
     </header>
 
@@ -33,7 +33,7 @@
 
     <footer>
         <div id="meBio">
-            <img src="IMG/1.jpg" alt="Photo of me">
+            <img src="../IMG/1.jpg" alt="Photo of me">
             <p>Heyo! My name is Devin de Wit,<br><br>I made this website as a school project in 2025. this is a
                 guitar/bass tab writing dedicated project. It would be a dream come true if people actually used this
                 haha!</p>
@@ -41,9 +41,9 @@
 
         <ul>
             <p>Navigate:</p>
-            <li onclick="window.location.href = '../index.html'">Create</li>
-            <li onclick="window.location.href = '../HTML/premade.html'">Pre-made</li>
-            <li onclick="window.location.href = '../HTML/contact.html'">Contact</li>
+            <li onclick="navbar('../index.html');">Create</li>
+            <li onclick="navbar('../HTML/premade.html');">Pre-made</li>
+            <li onclick="navbar('../HTML/contact.html');">Contact</li>
         </ul>
 
         <ul>
