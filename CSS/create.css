@@ -1,0 +1,49 @@
+#contentLeft {
+    min-height: calc(100vh - 80px);
+    width: 30vw;
+    min-width: 400px;
+
+    background-color: #335;
+    box-shadow: inset #0008 0px 100px 50px -100px;
+
+    transition: all 0.5s;
+}
+
+#contentLeftDetail1 {
+    width: calc(100% + 10px);
+    height: 10px;
+    
+    background-color: #335;
+    box-shadow: inset #0008 0px 100px 50px -100px;
+}
+
+#contentLeftDetail2 {
+    width: 20px;
+    height: 20px;
+    float: right;
+    transform: translateX(10px);
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+#contentMenuButton {
+    transform: translateY(-5px);
+    padding-left: 18px;
+    padding-right: 18px;
+
+    color: #fff;
+    font-weight: 800;
+    width: fit-content;
+    float: right;
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+
+    transition: all 0.5s;
+}
+
+#contentMenuButton:hover {
+    background-color: #0002;
+    border-radius: 50%;
+}

@@ -75,8 +75,9 @@ header p, header ul li {
     height: 57px;
     float: left;
 
-    background-color: #4af;
-    border-radius: 50%;
+    background: url('../IMG/logo.png');
+    background-position: center;
+    background-size: cover;
 }
 
 #navigation {
