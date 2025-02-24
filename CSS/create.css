@@ -1,6 +1,8 @@
 #contentLeft {
+    z-index: 1000;
+    position: absolute;
     min-height: calc(100vh - 80px);
-    width: 30vw;
+    width: 30%;
     min-width: 400px;
 
     background-color: #335;
@@ -46,4 +48,81 @@
 #contentMenuButton:hover {
     background-color: #0002;
     border-radius: 50%;
+}
+
+
+
+#contentRight {
+    position: absolute;
+    right: 0px;
+    min-height: calc(100vh - 80px);
+    width: 70%;
+
+    color: #335;
+
+    transition: all 0.75s;
+}
+
+#settingsBar {
+    width: 100%;
+    height: 100px;
+    margin-top: 70px;
+}
+
+.flexHolder {
+    padding-left: 80px;
+    display: flex;
+    justify-content: left;
+}
+
+#settingsBar h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding-left: 100px;
+}
+
+#settingsBar ul {
+    margin: 20px;
+    cursor: pointer;
+    user-select: none;
+    height: fit-content;
+
+    box-shadow: #3358 0px 0px 0px 1px;
+    border-radius: 10px;
+    text-align: center;
+
+    transition: all 0.5s;
+}
+
+#settingsBar ul p {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+#settingsBar ul div {
+    position: absolute;
+    transform: scale(0%);
+}
+
+#settingsBar ul div li {
+    list-style: none;
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+#settingsBar ul div li:hover {
+    font-weight: 800;
+}
+
+
+.currentScale {
+    width: 100%;
+
+    background-color: #6bf;
+    font-weight: 800;
 }

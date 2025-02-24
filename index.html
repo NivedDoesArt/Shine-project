@@ -33,6 +33,56 @@
 
             <div onclick="contentMenu()" id="contentMenuButton">&lt;</div>
         </div>
+
+        <div id="contentRight">
+            <div id="settingsBar">
+                <h3>Tuning:</h3>
+
+                <div class="flexHolder">
+                    <ul id="scaleUl" onclick="toggleScaleMenu()">
+                        <p id="selectedScale">E</p>
+
+                        <div id="scaleDiv">
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale1">A</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale2">A#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale3">B</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale4">C</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale5">C#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale6">D</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale7">D#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale8" class="currentScale">E</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale9">F</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale10">F#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale11">G</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale12">G#</li>
+                        </div>
+                    </ul>    
+
+                    <ul id="shapeUl" onclick="toggleShapeMenu()">
+                        <p id="selectedShape">Standard</p>
+
+                        <div id="shapeDiv">
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu()" id="shape1" class="currentScale">Standard</li>
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu()" id="shape2">Drop</li>
+                        </div>
+                    </ul>
+
+                    <ul id="stringUl" onclick="toggleStringMenu()">
+                        <p id="selectedString">6 strings</p>
+
+                        <div id="stringDiv">
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string1">4 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string2">5 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string3" class="currentScale">6 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string4">7 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string5">8 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string6">9 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string7">10 strings???</li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
 

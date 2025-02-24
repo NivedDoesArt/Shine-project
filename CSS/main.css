@@ -62,12 +62,12 @@ header p, header ul li {
 #siteNameHolder:hover {
     transform: translateY(-4px);
     background-color: #aaf1;
-    box-shadow: #0002 0px 4px 0px 0px;
+    box-shadow: #0004 0px 4px 0px 0px;
 }
 
 #siteNameHolder:active {
     transform: translateY(-2px) !important;
-    box-shadow: #0002 0px 2px 0px 0px !important;
+    box-shadow: #0004 0px 2px 0px 0px !important;
 }
 
 #siteLogo {
@@ -94,7 +94,7 @@ header p, header ul li {
     cursor: pointer;
     border-radius: 100px;
     user-select: none;
-    box-shadow: #0002 0px 0px 0px 0px;
+    box-shadow: #0004 0px 0px 0px 0px;
 
     transition: all 0.2s;
 }
@@ -102,7 +102,7 @@ header p, header ul li {
 #navigation li:hover {
     transform: translateY(-4px);
     background-color: #aaf1;
-    box-shadow: #0002 0px 4px 0px 0px;
+    box-shadow: #0004 0px 4px 0px 0px;
 }
 
 #navigation li:active {
@@ -114,17 +114,17 @@ header p, header ul li {
     background-color: #6bf !important;
     border-radius: 100px;
     color: #335;
-    box-shadow: #6bfa 0px 0px 0px 0px !important;
+    box-shadow: #6bf8 0px 0px 0px 0px !important;
 }
 
 #activePage:hover {
     transform: translateY(-4px);
-    box-shadow: #6bfa 0px 4px 0px 0px !important;
+    box-shadow: #6bf8 0px 4px 0px 0px !important;
 }
 
 #activePage:active {
     transform: translateY(-2px) !important;
-    box-shadow: #6bfa 0px 2px 0px 0px !important;
+    box-shadow: #6bf8 0px 2px 0px 0px !important;
 }
 
 
