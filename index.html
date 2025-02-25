@@ -43,18 +43,18 @@
                         <p id="selectedScale">E</p>
 
                         <div id="scaleDiv">
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale1">A</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale2">A#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale3">B</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale4">C</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale5">C#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale6">D</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale7">D#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale8" class="currentScale">E</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale9">F</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale10">F#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale11">G</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu()" id="scale12">G#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale1">A</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale2">A#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale3">B</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale4">C</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale5">C#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale6">D</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale7">D#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale8" class="currentScale">E</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale9">F</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale10">F#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale11">G</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale12">G#</li>
                         </div>
                     </ul>    
 
@@ -62,8 +62,8 @@
                         <p id="selectedShape">Standard</p>
 
                         <div id="shapeDiv">
-                            <li onclick="shapeSelect(this.id); toggleShapeMenu()" id="shape1" class="currentScale">Standard</li>
-                            <li onclick="shapeSelect(this.id); toggleShapeMenu()" id="shape2">Drop</li>
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')" id="shape1" class="currentScale">Standard</li>
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')" id="shape2">Drop</li>
                         </div>
                     </ul>
 
@@ -71,16 +71,20 @@
                         <p id="selectedString">6 strings</p>
 
                         <div id="stringDiv">
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string1">4 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string2">5 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string3" class="currentScale">6 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string4">7 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string5">8 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string6">9 strings</li>
-                            <li onclick="stringSelect(this.id); toggleStringMenu()" id="string7">10 strings???</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string1">4 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string2">5 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string3" class="currentScale">6 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string4">7 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string5">8 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string6">9 strings</li>
+                            <li onclick="stringSelect(this.id); toggleStringMenu(); loadTab('temp', 'temp', this.id)" id="string7">10 strings???</li>
                         </div>
                     </ul>
                 </div>
+            </div>
+
+            <div id="tabLocation">
+
             </div>
         </div>
     </div>
