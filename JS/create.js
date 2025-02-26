@@ -62,7 +62,7 @@ var value1
 var value2
 var value3
 
-var rowAmount = 2
+var rowAmount = 1
 
 function loadTab(scale, shape, string) {
     document.getElementById("tabLocation").innerHTML = ""
@@ -436,4 +436,14 @@ function stringSelect(currentID) {
     document.getElementById("selectedString").innerHTML = document.getElementById(currentID).innerHTML
 
     currentString = currentID
+}
+
+
+
+function increaseRow(amount) {
+    rowAmount = rowAmount + amount
+    if (rowAmount < 1) {
+        rowAmount = 1
+    }
+    loadTab()
 }

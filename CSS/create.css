@@ -123,6 +123,40 @@
     font-weight: 800;
 }
 
+#rowAmount {
+    margin: 20px;
+    user-select: none;
+    height: fit-content;
+
+    box-shadow: #3358 0px 0px 0px 1px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+
+    transition: all 0.25s;
+}
+
+#rowAmount button {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    font-size: 1rem;
+    font-weight: 800;    
+    border: none;
+    color: #335;
+    box-shadow: #3358 0px 0px 0px 1px;
+    background-color: #0000;
+    cursor: pointer;
+
+    transition: all 0.25s;
+}
+
+#rowAmount button:hover {
+    background-color: #6bf2;
+}
+
+
 
 .currentScale {
     width: 100%;

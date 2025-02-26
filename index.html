@@ -36,9 +36,10 @@
 
         <div id="contentRight">
             <div id="settingsBar">
-                <h3>Tuning:</h3>
+                <h3>Settings:</h3>
 
                 <div class="flexHolder">
+
                     <ul id="scaleUl" onclick="toggleScaleMenu()">
                         <p id="selectedScale">E</p>
 
@@ -80,6 +81,16 @@
                             <li onclick="shapeSelect('shape1'); scaleSelect('scale12');stringSelect(this.id); toggleStringMenu(); loadTab('scale12', 'shape1', this.id)" id="string7">10 strings???</li>
                         </div>
                     </ul>
+
+                    <div id="rowAmount">
+                        <button onclick="increaseRow(1)">
+                            Row +
+                        </button>
+
+                        <button onclick="increaseRow(-1)">
+                            Row -
+                        </button>
+                    </div>
                 </div>
             </div>
 
