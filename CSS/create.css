@@ -91,7 +91,11 @@
     border-radius: 10px;
     text-align: center;
 
-    transition: all 0.5s;
+    transition: all 0.25s;
+}
+
+#settingsBar ul:hover {
+    background-color: #6bf2;
 }
 
 #settingsBar ul p {
@@ -129,8 +133,13 @@
 
 
 
-#tabLocation {
-    font-family: "Anonymous Pro", serif;
-    font-weight: 400;
-    font-style: normal;
+.tabColumn {
+    margin: 20px;
+    width: calc(100% - 40px);
+}
+
+.tabColumn p {
+    font-family: "Anonymous Pro", serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
 }
