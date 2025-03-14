@@ -82,12 +82,14 @@
 }
 
 #settingsBar ul {
+    z-index: 9999999999;
     margin: 20px;
     cursor: pointer;
     user-select: none;
     height: fit-content;
 
     box-shadow: #3358 0px 0px 0px 1px;
+    background-color: #fff;
     border-radius: 10px;
     text-align: center;
 
@@ -95,7 +97,7 @@
 }
 
 #settingsBar ul:hover {
-    background-color: #6bf2;
+    background-color: #adf;
 }
 
 #settingsBar ul p {
@@ -146,14 +148,14 @@
     border: none;
     color: #335;
     box-shadow: #3358 0px 0px 0px 1px;
-    background-color: #0000;
+    background-color: #fff;
     cursor: pointer;
 
     transition: all 0.25s;
 }
 
 #rowAmount button:hover {
-    background-color: #6bf2;
+    background-color: #adf;
 }
 
 
@@ -170,10 +172,68 @@
 .tabColumn {
     margin: 20px;
     width: calc(100% - 40px);
+    user-select: none;
+
 }
 
 .tabColumn p {
     font-family: "Anonymous Pro", serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
+}
+
+.tabRow {
+    display: flex;
+}
+
+.tabRowLine {
+    padding-left: 3px;
+    padding-right: 1px;
+    width: fit-content;
+    float: left;
+
+    cursor: pointer;
+
+    transition: all 0.1s;
+}
+
+.tabRowLine:hover {
+    background-color: #6bf8;
+    border-radius: 10px;
+}
+
+.tabRowLine:focus {
+    box-shadow: inset #6bf 0px 0px 0px 1px !important;
+    border-radius: 10px;
+}
+
+
+
+#noteSelectArea {
+    position: fixed;
+    z-index: 99999999999999999;
+    bottom: 0px;
+    left: 0px;
+    width: calc(100% - 20vw);
+    margin-left: 10vw;
+    margin-right: 10vw;
+    height: 30vh;
+
+    background-color: #335;
+    box-shadow: #0008 0px 0px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transform: translateY(110%);
+
+    transition: all 0.5s;
+}
+
+.noteSelectString {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: calc(4px);
+
+    background-color: #fffb;
+    border-radius: 10px;
 }
