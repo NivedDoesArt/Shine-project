@@ -27,6 +27,9 @@ var toggleScale = 0
 var toggleShape = 0
 var toggleString = 0
 
+var clickedStringID
+var generatedStringID
+
 //A   1
 //A#  2
 //B   3
@@ -213,7 +216,8 @@ function loadTab(scale, shape, string) {
                     newRowLine.setAttribute("onClick", "rowLineClick(this.id)")
                     newRowLine.setAttribute("class", "tabRowLine")
                     newRowLine.setAttribute("tabindex", "1")
-                    newRowLine.setAttribute("id", rowAmount + "$" + iiii + "$" + iii + "$" + i)
+                    generatedStringID = ii + "$" + iiii + "$" + iii + "$" + i
+                    newRowLine.setAttribute("id", generatedStringID)
                     newRowLine.innerHTML = "-"
                 }
                 const newRowLine = newRow.appendChild(document.createElement("p"))
@@ -234,14 +238,88 @@ function reloadStrings() {
     const newString = document.getElementById("noteSelectArea").appendChild(document.createElement("div"))
     newString.setAttribute("class", "noteSelectString")
     newString.style.marginTop = ((document.getElementById("noteSelectArea").offsetHeight / (value3 / 0.8)) - 2) + "px"
+
+    for (x = 0; x < 25; x++) {
+        const newNote = newString.appendChild(document.createElement("button"))
+        newNote.innerHTML = x
+        newNote.setAttribute("class", "noteSelect")
+        newNote.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    }
+
+
+
+    const stringButtonLayout = document.getElementById("noteSelectArea").appendChild(document.createElement("div"))
+    stringButtonLayout.setAttribute("class", "stringButtonLayout")
+
+    const stringButtonHolder1 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder1.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder1.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder1.innerHTML = "Delete"
+
+    const stringButtonHolder2 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder2.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder2.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder2.innerHTML = "X"
+
+    const stringButtonHolder3 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder3.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder3.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder3.innerHTML = "/"
+
+    const stringButtonHolder4 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder4.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder4.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder4.innerHTML = "\\"
+
+    const stringButtonHolder5 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder5.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder5.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder5.innerHTML = "h"
+
+    const stringButtonHolder6 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder6.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder6.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder6.innerHTML = "p"
+
+    const stringButtonHolder7 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder7.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder7.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder7.innerHTML = "b"
+
+    const stringButtonHolder8 = stringButtonLayout.appendChild(document.createElement("button"))
+    stringButtonHolder8.setAttribute("class", "stringButtonHolder")
+    stringButtonHolder8.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringButtonHolder8.innerHTML = "~"
+
 }
 reloadStrings()
 
 
 
+function noteSelect(content) {
+    if (content == "Delete") {
+        document.getElementById(clickedStringID).innerHTML = "-"
+        document.getElementById(clickedStringID).style = null
+    }
+    else {
+        var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
+        document.getElementById(clickedStringID).innerHTML = content
+        document.getElementById(clickedStringID).style.width = currentNoteWidth + "px"
+        document.getElementById(clickedStringID).style.fontSize = "0.9em"
+        document.getElementById(clickedStringID).style.letterSpacing = "-2px"
+        document.getElementById(clickedStringID).style.fontKerning = "normal"
+        document.getElementById(clickedStringID).style.textAlign = "center"
+        document.getElementById(clickedStringID).style.paddingLeft = "0px"
+        document.getElementById(clickedStringID).style.paddingRight = "0px"    
+    }
+    toggleNoteSelect(0)
+}
+
+
+
 function toggleNoteSelect(open) {
     if (open == 0) {
-
+        document.getElementById("noteSelectArea").style.transform = null
     } else if (open == 1) {
         document.getElementById("noteSelectArea").style.transform = "translateY(0px)"
     }
@@ -250,6 +328,7 @@ function toggleNoteSelect(open) {
 function rowLineClick(clickedId) {
     toggleNoteSelect(1)
     console.log(clickedId)
+    clickedStringID = clickedId
 }
 
 
