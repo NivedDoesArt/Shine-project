@@ -291,15 +291,45 @@ function reloadStrings() {
     stringButtonHolder8.setAttribute("onClick", "noteSelect(this.innerHTML)")
     stringButtonHolder8.innerHTML = "~"
 
+
+
+    const stringSettingLayout = document.getElementById("noteSelectArea").appendChild(document.createElement("div"))
+    stringSettingLayout.setAttribute("class", "stringButtonLayout")
+
+    const stringSettingHolder0 = stringSettingLayout.appendChild(document.createElement("button"))
+    stringSettingHolder0.setAttribute("class", "stringSettingHolder")
+    stringSettingHolder0.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringSettingHolder0.innerHTML = "Close"
+
+    const stringSettingHolder1 = stringSettingLayout.appendChild(document.createElement("button"))
+    stringSettingHolder1.setAttribute("class", "stringSettingHolder")
+    stringSettingHolder1.setAttribute("id", "stringSettingHolder1")
+    stringSettingHolder1.setAttribute("onClick", "lockNotes()")
+    stringSettingHolder1.innerHTML = "Lock"
+
+    const stringSettingHolder2 = stringSettingLayout.appendChild(document.createElement("button"))
+    stringSettingHolder2.setAttribute("class", "stringSettingHolder")
+    stringSettingHolder2.setAttribute("onClick", "noteSelect(this.innerHTML)")
+    stringSettingHolder2.innerHTML = "PM"
 }
 reloadStrings()
 
 
 
+var isLocked = false
+
 function noteSelect(content) {
+    if (document.getElementById(lastClickedId1)) {
+        document.getElementById(lastClickedId1).style.boxShadow = "inset #fff 0px 0px 0px 0px"
+        document.getElementById(lastClickedId1).style.borderRadius = "10px"
+    }
+
     if (content == "Delete") {
         document.getElementById(clickedStringID).innerHTML = "-"
         document.getElementById(clickedStringID).style = null
+    }
+    else if (content == "Close") {
+
     }
     else {
         var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
@@ -310,10 +340,32 @@ function noteSelect(content) {
         document.getElementById(clickedStringID).style.fontKerning = "normal"
         document.getElementById(clickedStringID).style.textAlign = "center"
         document.getElementById(clickedStringID).style.paddingLeft = "0px"
-        document.getElementById(clickedStringID).style.paddingRight = "0px"    
+        document.getElementById(clickedStringID).style.paddingRight = "0px"
     }
-    toggleNoteSelect(0)
+
+    if (isLocked == false || content == "Close") {
+        toggleNoteSelect(0)
+    }
 }
+
+
+
+function lockNotes() {
+    isLocked = !isLocked
+
+    if (isLocked == true) {
+        document.getElementById("stringSettingHolder1").style.backgroundColor = "#fff8"
+        document.getElementById("stringSettingHolder1").style.color = "#335"
+        document.getElementById("stringSettingHolder1").style.fontWeight = "800"
+    }
+    else if (isLocked == false) {
+        document.getElementById("stringSettingHolder1").style.backgroundColor = null
+        document.getElementById("stringSettingHolder1").style.color = null
+        document.getElementById("stringSettingHolder1").style.fontWeight = null
+
+    }
+}
+lockNotes()
 
 
 
@@ -325,9 +377,20 @@ function toggleNoteSelect(open) {
     }
 }
 
+var lastClickedId1
+
 function rowLineClick(clickedId) {
     toggleNoteSelect(1)
     console.log(clickedId)
+
+    if (document.getElementById(lastClickedId1)) {
+        document.getElementById(lastClickedId1).style.boxShadow = "inset #fff 0px 0px 0px 0px"
+        document.getElementById(lastClickedId1).style.borderRadius = "10px"
+    }
+    document.getElementById(clickedId).style.boxShadow = "inset #6bf 0px 0px 0px 2px"
+    document.getElementById(clickedId).style.borderRadius = "10px"
+
+    lastClickedId1 = clickedId
     clickedStringID = clickedId
 }
 
