@@ -1,3 +1,11 @@
+var test = ["one", "two", "three", "four"]
+sessionStorage.setItem("test", test)
+console.log(sessionStorage.getItem("test").split(",")[1])
+
+
+
+
+
 var menuToggle = 0
 
 function contentMenu() {
@@ -29,6 +37,10 @@ var toggleString = 0
 
 var clickedStringID
 var generatedStringID
+
+var globalCapoState = false
+
+var rowLineAmount = 8
 
 //A   1
 //A#  2
@@ -77,9 +89,21 @@ var value2
 var value3
 
 var rowAmount = 1
+var capoValue = "none"
+var timesigValue = "4/4"
 
 function loadTab(scale, shape, string) {
     document.getElementById("tabLocation").innerHTML = ""
+
+    const tabCapo = document.getElementById("tabLocation").appendChild(document.createElement("p"))
+    tabCapo.innerHTML = "Capo: " + capoValue
+    tabCapo.setAttribute("style", "margin-top: 1em; margin-left: 20px; font-family: 'Anonymous Pro', serif !important; font - weight: 400 !important; font - style: normal !important; ")
+    tabCapo.setAttribute("id", "tabCapoId")
+
+    const tabTimesig = document.getElementById("tabLocation").appendChild(document.createElement("p"))
+    tabTimesig.innerHTML = "Time signature: " + timesigValue
+    tabTimesig.setAttribute("style", "margin-bottom: 1em; margin-left: 20px; font-family: 'Anonymous Pro', serif !important; font - weight: 400 !important; font - style: normal !important; ")
+
     reloadStrings()
 
     for (ii = 0; ii != rowAmount; ii++) {
@@ -152,11 +176,11 @@ function loadTab(scale, shape, string) {
         const newElement = document.getElementById("tabLocation").appendChild(document.createElement("div"))
         newElement.setAttribute("class", "tabColumn")
 
-        for (i = 0; i < eval(value2 + value3).length; i++) {
+
+
+        for (i = -1; i < eval(value2 + value3).length; i++) {
             var currentNote = (eval(value2 + value3)[i] + value1)
             var currentLetterNote
-
-            console.log("AAAAAAAAAAAAAAAAAAAAAA")
 
             if (currentNote <= 0) {
                 currentNote = currentNote + 12
@@ -205,23 +229,31 @@ function loadTab(scale, shape, string) {
             }
             console.log(currentLetterNote)
 
-            const newRow = newElement.appendChild(document.createElement("div"))
-            const newRowP = newRow.appendChild(document.createElement("p"))
-            newRowP.innerHTML = (currentLetterNote)
-            newRow.setAttribute("class", "tabRow")
 
-            for (iiii = 0; iiii < 4; iiii++) {
-                for (iii = 0; iii < 16; iii++) {
+            if (i != -1) {
+                const newRow = newElement.appendChild(document.createElement("div"))
+                const newRowP = newRow.appendChild(document.createElement("p"))
+                newRowP.innerHTML = (currentLetterNote)
+                newRow.setAttribute("class", "tabRow")
+
+                for (iiii = 0; iiii < 4; iiii++) {
+                    for (iii = 0; iii < rowLineAmount * 2; iii++) {
+                        const newRowLine = newRow.appendChild(document.createElement("p"))
+                        newRowLine.setAttribute("onClick", "rowLineClick(this.id)")
+                        newRowLine.setAttribute("class", "tabRowLine")
+                        newRowLine.setAttribute("tabindex", "1")
+                        generatedStringID = ii + "$" + iiii + "$" + iii + "$" + i
+                        newRowLine.setAttribute("id", generatedStringID)
+                        newRowLine.innerHTML = "-"
+                    }
                     const newRowLine = newRow.appendChild(document.createElement("p"))
-                    newRowLine.setAttribute("onClick", "rowLineClick(this.id)")
-                    newRowLine.setAttribute("class", "tabRowLine")
-                    newRowLine.setAttribute("tabindex", "1")
-                    generatedStringID = ii + "$" + iiii + "$" + iii + "$" + i
-                    newRowLine.setAttribute("id", generatedStringID)
-                    newRowLine.innerHTML = "-"
+                    newRowLine.innerHTML = "|"
+
                 }
-                const newRowLine = newRow.appendChild(document.createElement("p"))
-                newRowLine.innerHTML = "|"
+            }
+            else {
+                const palmMute = newElement.appendChild(document.createElement("p"))
+                palmMute.innerHTML = "PM|"
             }
         }
     }
@@ -237,12 +269,16 @@ function reloadStrings() {
     document.getElementById("noteSelectArea").innerHTML = ""
     const newString = document.getElementById("noteSelectArea").appendChild(document.createElement("div"))
     newString.setAttribute("class", "noteSelectString")
-    newString.style.marginTop = ((document.getElementById("noteSelectArea").offsetHeight / (value3 / 0.8)) - 2) + "px"
+    newString.style.marginTop = "1em"
+
+    const newStringCapo = newString.appendChild(document.createElement("div"))
+    newStringCapo.setAttribute("id", "noteSelectStringCapo")
 
     for (x = 0; x < 25; x++) {
         const newNote = newString.appendChild(document.createElement("button"))
         newNote.innerHTML = x
         newNote.setAttribute("class", "noteSelect")
+        newNote.setAttribute("id", "noteSelect" + x)
         newNote.setAttribute("onClick", "noteSelect(this.innerHTML)")
     }
 
@@ -259,7 +295,7 @@ function reloadStrings() {
     const stringButtonHolder2 = stringButtonLayout.appendChild(document.createElement("button"))
     stringButtonHolder2.setAttribute("class", "stringButtonHolder")
     stringButtonHolder2.setAttribute("onClick", "noteSelect(this.innerHTML)")
-    stringButtonHolder2.innerHTML = "X"
+    stringButtonHolder2.innerHTML = "x"
 
     const stringButtonHolder3 = stringButtonLayout.appendChild(document.createElement("button"))
     stringButtonHolder3.setAttribute("class", "stringButtonHolder")
@@ -306,11 +342,25 @@ function reloadStrings() {
     stringSettingHolder1.setAttribute("id", "stringSettingHolder1")
     stringSettingHolder1.setAttribute("onClick", "lockNotes()")
     stringSettingHolder1.innerHTML = "Lock"
+    if (isLocked == true) {
+        document.getElementById("stringSettingHolder1").style.backgroundColor = "#fff8"
+        document.getElementById("stringSettingHolder1").style.color = "#335"
+        document.getElementById("stringSettingHolder1").style.fontWeight = "800"
+    }
+    else if (isLocked == false) {
+        document.getElementById("stringSettingHolder1").style.backgroundColor = null
+        document.getElementById("stringSettingHolder1").style.color = null
+        document.getElementById("stringSettingHolder1").style.fontWeight = null
+    }
+
 
     const stringSettingHolder2 = stringSettingLayout.appendChild(document.createElement("button"))
     stringSettingHolder2.setAttribute("class", "stringSettingHolder")
     stringSettingHolder2.setAttribute("onClick", "noteSelect(this.innerHTML)")
     stringSettingHolder2.innerHTML = "PM"
+
+    globalCapoState = true
+    noteSelect(capoValue)
 }
 reloadStrings()
 
@@ -319,32 +369,51 @@ reloadStrings()
 var isLocked = false
 
 function noteSelect(content) {
-    if (document.getElementById(lastClickedId1)) {
-        document.getElementById(lastClickedId1).style.boxShadow = "inset #fff 0px 0px 0px 0px"
-        document.getElementById(lastClickedId1).style.borderRadius = "10px"
-    }
+    if (globalCapoState == false) {
+        if (document.getElementById(lastClickedId1)) {
+            document.getElementById(lastClickedId1).style.boxShadow = "inset #fff 0px 0px 0px 0px"
+            document.getElementById(lastClickedId1).style.borderRadius = "10px"
+        }
 
-    if (content == "Delete") {
-        document.getElementById(clickedStringID).innerHTML = "-"
-        document.getElementById(clickedStringID).style = null
-    }
-    else if (content == "Close") {
+        if (content == "Delete") {
+            document.getElementById(clickedStringID).innerHTML = "-"
+            document.getElementById(clickedStringID).style = null
+        }
+        else if (content == "Close") {
 
-    }
-    else {
-        var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
-        document.getElementById(clickedStringID).innerHTML = content
-        document.getElementById(clickedStringID).style.width = currentNoteWidth + "px"
-        document.getElementById(clickedStringID).style.fontSize = "0.9em"
-        document.getElementById(clickedStringID).style.letterSpacing = "-2px"
-        document.getElementById(clickedStringID).style.fontKerning = "normal"
-        document.getElementById(clickedStringID).style.textAlign = "center"
-        document.getElementById(clickedStringID).style.paddingLeft = "0px"
-        document.getElementById(clickedStringID).style.paddingRight = "0px"
+        }
+        else {
+            var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
+            document.getElementById(clickedStringID).innerHTML = content
+            document.getElementById(clickedStringID).style.width = currentNoteWidth + "px"
+            document.getElementById(clickedStringID).style.fontSize = "0.9em"
+            document.getElementById(clickedStringID).style.letterSpacing = "-2px"
+            document.getElementById(clickedStringID).style.fontKerning = "normal"
+            document.getElementById(clickedStringID).style.textAlign = "center"
+            document.getElementById(clickedStringID).style.paddingLeft = "0px"
+            document.getElementById(clickedStringID).style.paddingRight = "0px"
+        }
+    } else {
+        if (content == "Delete" || content == "0" || content == "PM" || content == "x" || content == "/" || content == "\\" || content == "b" || content == "h" || content == "p" || content == "~") {
+            document.getElementById("capoSelector").innerHTML = "Capo: none"
+            document.getElementById("noteSelectStringCapo").style.width = "0px"
+            capoValue = "none"
+            loadTab()
+        }
+
+        else if (content != "Close") {
+            document.getElementById("capoSelector").innerHTML = "Capo: " + content
+            document.getElementById("noteSelectStringCapo").style.width = "calc(" + content + " * (100% / 26.1))"
+            capoValue = content
+            document.getElementById("tabCapoId").innerHTML = "Capo: " + capoValue
+        }
     }
 
     if (isLocked == false || content == "Close") {
         toggleNoteSelect(0)
+        if (globalCapoState == true) {
+            globalCapoState = false
+        }
     }
 }
 
@@ -362,19 +431,25 @@ function lockNotes() {
         document.getElementById("stringSettingHolder1").style.backgroundColor = null
         document.getElementById("stringSettingHolder1").style.color = null
         document.getElementById("stringSettingHolder1").style.fontWeight = null
-
     }
 }
 lockNotes()
 
 
 
-function toggleNoteSelect(open) {
+var globalCapoState = false
+
+function toggleNoteSelect(open, capo) {
+    if (capo == true) {
+        globalCapoState = true
+    }
+
     if (open == 0) {
         document.getElementById("noteSelectArea").style.transform = null
     } else if (open == 1) {
         document.getElementById("noteSelectArea").style.transform = "translateY(0px)"
     }
+
 }
 
 var lastClickedId1
@@ -643,5 +718,40 @@ function increaseRow(amount) {
     if (rowAmount < 1) {
         rowAmount = 1
     }
+    loadTab()
+}
+
+
+
+var timeSig = 0
+
+function timeSigSelect() {
+    timeSig++
+
+    if (timeSig == 0) {
+        document.getElementById("timeSig").innerHTML = "Time signature: 4/4"
+        rowLineAmount = 8
+        timesigValue = "4/4"
+    }
+    else if (timeSig == 1) {
+        document.getElementById("timeSig").innerHTML = "Time signature: 3/4"
+        rowLineAmount = 6
+        timesigValue = "3/4"
+    }
+    else if (timeSig == 2) {
+        document.getElementById("timeSig").innerHTML = "Time signature: 5/4"
+        rowLineAmount = 10
+        timesigValue = "5/4"
+    }
+    else if (timeSig == 3) {
+        document.getElementById("timeSig").innerHTML = "Time signature: 7/4"
+        rowLineAmount = 7
+        timesigValue = "7/4"
+    }
+    else if (timeSig == 4) {
+        timeSig = -1
+        timeSigSelect()
+    }
+
     loadTab()
 }

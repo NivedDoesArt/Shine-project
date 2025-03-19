@@ -11,6 +11,36 @@
     transition: all 0.5s;
 }
 
+#contentLeft h1 {
+    padding: 1em;
+    margin-left: 20%;
+    color: #fff;
+    font-weight: 600;
+}
+
+#contentLeft h2 {
+    margin: 0.5em;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 0.2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: fit-content;
+
+    color: #fff;
+    background-color: #fff2;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+
+    transition: all 0.2s;
+}
+
+#contentLeft h2:hover {
+    background-color: #fff4;
+}
+
+ 
 #contentLeftDetail1 {
     width: calc(100% + 10px);
     height: 10px;
@@ -205,6 +235,8 @@
 
 
 
+
+
 #noteSelectArea {
     position: fixed;
     z-index: 99999999999999999;
@@ -234,6 +266,20 @@
 
     background-color: #fffb;
     border-radius: 10px;
+}
+
+#noteSelectStringCapo {
+    position: absolute;
+    right: 0px;
+    width: 0%;
+    height: 40px;
+    margin-right: 2%;
+    z-index: 9999999999999999999999;
+
+    background-color: #3358;
+    border-radius: 2px;
+
+    transition: all 0.5s;
 }
 
 .noteSelect {
