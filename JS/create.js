@@ -1,5 +1,6 @@
 var test = ["one", "two", "three", "four"]
-localStorage.setItem("test", test)
+try {localStorage.setItem("test", test)}
+catch{console.error}
 console.log(localStorage.getItem("test").split(",")[1])
 
 
