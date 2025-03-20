@@ -3,7 +3,35 @@ try {localStorage.setItem("test", test)}
 catch{console.error}
 console.log(localStorage.getItem("test").split(",")[1])
 
+function checkAndRequestStorageAccess() {
+    if (document.hasStorageAccess) {
+      document.hasStorageAccess().then(hasAccess => {
+        if (hasAccess) {
+          // storage is available for use.
+          try {
+            localStorage.setItem('test', '1'); // Test if storage works.
+            localStorage.removeItem('test');
+            console.log("localStorage is accessible");
+          } catch (e) {
+            console.error("localStorage is not working:", e);
+          }
+        } else {
+          // no access yet, let's request it.
+          document.requestStorageAccess().then(() => {
+            console.log("Storage access granted");
+          }).catch(() => {
+            console.error("Failed to get storage access");
+          });
+        }
+      }).catch((error) => {
+        console.error("Error when checking storage access:", error);
+      });
+    } else {
+        console.error("hasStorageAccess API is not available");
+    }
+  }
 
+  checkAndRequestStorageAccess()
 
 
 
