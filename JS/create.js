@@ -1,8 +1,3 @@
-var test = ["one", "two", "three", "four"]
-try {localStorage.setItem("test", test)}
-catch{console.error}
-console.log(localStorage.getItem("test").split(",")[1])
-
 function checkAndRequestStorageAccess() {
     if (document.hasStorageAccess) {
       document.hasStorageAccess().then(hasAccess => {
