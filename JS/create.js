@@ -1,6 +1,6 @@
 var test = ["one", "two", "three", "four"]
-sessionStorage.setItem("test", test)
-console.log(sessionStorage.getItem("test").split(",")[1])
+localStorage.setItem("test", test)
+console.log(localStorage.getItem("test").split(",")[1])
 
 
 
@@ -378,13 +378,17 @@ function noteSelect(content) {
         if (content == "Delete") {
             document.getElementById(clickedStringID).innerHTML = "-"
             document.getElementById(clickedStringID).style = null
+
+            document.getElementById(clickedStringID).removeAttribute("title")
         }
         else if (content == "Close") {
 
         }
         else {
             var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
+
             document.getElementById(clickedStringID).innerHTML = content
+            document.getElementById(clickedStringID).title = content
             document.getElementById(clickedStringID).style.width = currentNoteWidth + "px"
             document.getElementById(clickedStringID).style.fontSize = "0.9em"
             document.getElementById(clickedStringID).style.letterSpacing = "-2px"
