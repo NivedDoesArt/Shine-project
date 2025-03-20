@@ -1,31 +1,11 @@
-function checkAndRequestStorageAccess() {
-    if (document.hasStorageAccess) {
-      document.hasStorageAccess().then(hasAccess => {
-        if (hasAccess) {
-          // storage is available for use.
-          try {
-            localStorage.setItem('test', '1'); // Test if storage works.
-            console.log("localStorage is accessible");
-          } catch (e) {
-            console.error("localStorage is not working:", e);
-          }
-        } else {
-          // no access yet, let's request it.
-          document.requestStorageAccess().then(() => {
-            console.log("Storage access granted");
-          }).catch(() => {
-            console.error("Failed to get storage access");
-          });
-        }
-      }).catch((error) => {
-        console.error("Error when checking storage access:", error);
-      });
-    } else {
-        console.error("hasStorageAccess API is not available");
-    }
-  }
-
-  checkAndRequestStorageAccess()
+var capoStorage = localStorage.getItem("capoStorage")
+var timeSigStorage = localStorage.getItem("timeSigStorage")
+var stringAmountStorage = localStorage.getItem("stringAmountStorage")
+var stringLetterStorage = localStorage.getItem("stringLetterStorage")
+var stringTuningStorage = localStorage.getItem("stringTuningStorage")
+var rowStorage = localStorage.getItem("rowStorage")
+var pmStorage = localStorage.getItem("pmStorage")
+var noteStorage = localStorage.getItem("noteStorage")
 
 
 
@@ -253,6 +233,7 @@ function loadTab(scale, shape, string) {
             console.log(currentLetterNote)
 
 
+
             if (i != -1) {
                 const newRow = newElement.appendChild(document.createElement("div"))
                 const newRowP = newRow.appendChild(document.createElement("p"))
@@ -277,6 +258,21 @@ function loadTab(scale, shape, string) {
             else {
                 const palmMute = newElement.appendChild(document.createElement("p"))
                 palmMute.innerHTML = "PM|"
+                palmMute.setAttribute("class", "tabRow")
+
+                for (iiii = 0; iiii < 4; iiii++) {
+                    for (iii = 0; iii < rowLineAmount * 2; iii++) {
+                        const palmMuteLine = palmMute.appendChild(document.createElement("p"))
+                        palmMuteLine.setAttribute("class", "palmMuteLine")
+                        palmMuteLine.setAttribute("tabindex", "1")
+                        generatedStringID = ii + "$" + iiii + "$" + iii + "$" + i
+                        palmMuteLine.setAttribute("id", generatedStringID)
+                        palmMuteLine.innerHTML = "&nbsp;"
+                    }
+                    const palmMuteLine = palmMute.appendChild(document.createElement("p"))
+                    palmMuteLine.innerHTML = "|"
+
+                }
             }
         }
     }
@@ -403,6 +399,9 @@ function noteSelect(content) {
             document.getElementById(clickedStringID).style = null
 
             document.getElementById(clickedStringID).removeAttribute("title")
+        }
+        else if (content == "PM") {
+            localStorage.setItem("pmStorage", content)
         }
         else if (content == "Close") {
 

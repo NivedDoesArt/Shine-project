@@ -355,3 +355,14 @@
 .stringSettingHolder:hover {
     background-color: #fff4;
 }
+
+
+
+.palmMuteLine {
+    padding-left: 3px;
+    padding-right: 1px;
+    width: fit-content;
+    float: left;
+
+    transition: all 0.1s;
+}
