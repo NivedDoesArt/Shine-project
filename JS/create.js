@@ -5,7 +5,6 @@ function checkAndRequestStorageAccess() {
           // storage is available for use.
           try {
             localStorage.setItem('test', '1'); // Test if storage works.
-            localStorage.removeItem('test');
             console.log("localStorage is accessible");
           } catch (e) {
             console.error("localStorage is not working:", e);
