@@ -375,6 +375,7 @@ function reloadStrings() {
 
     const stringSettingHolder2 = stringSettingLayout.appendChild(document.createElement("button"))
     stringSettingHolder2.setAttribute("class", "stringSettingHolder")
+    stringSettingHolder2.setAttribute("id", "pmToggleButton")
     stringSettingHolder2.setAttribute("onClick", "noteSelect(this.innerHTML)")
     stringSettingHolder2.innerHTML = "PM"
 
@@ -401,7 +402,7 @@ function noteSelect(content) {
             document.getElementById(clickedStringID).removeAttribute("title")
         }
         else if (content == "PM") {
-            localStorage.setItem("pmStorage", content)
+            pmToggle();
         }
         else if (content == "Close") {
 
@@ -445,6 +446,191 @@ function noteSelect(content) {
 
 
 
+var pmTogglable = true
+
+/*
+var clickedIdDeconstruct1
+var clickedIdDeconstruct2
+var clickedIdDeconstruct3
+var clickedIdDeconstruct4
+var clickedIdDeconstruct5
+var clickedIdDeconstruct6
+
+var clickedIdReconstruct1
+var clickedIdReconstruct2
+var clickedIdReconstruct3
+*/
+
+function pmToggle() {
+    if (pmTogglable == true) {
+        //enable toggle
+        document.getElementById("pmToggleButton").setAttribute("style", "background-color: rgba(255, 255, 255, 0.533); color: rgb(51, 51, 85); font-weight: 800;")
+        pmTogglable = false
+
+        clickedIdDeconstruct1 = lastClickedId1.split("$")[0]
+        clickedIdDeconstruct2 = lastClickedId1.split("$")[1]
+        clickedIdDeconstruct3 = lastClickedId1.split("$")[2]
+
+        clickedIdDeconstruct1 = parseInt(clickedIdDeconstruct1)
+        clickedIdDeconstruct2 = parseInt(clickedIdDeconstruct2)
+        clickedIdDeconstruct3 = parseInt(clickedIdDeconstruct3)
+
+        clickedIdReconstruct1 = clickedIdDeconstruct1 + "$" + clickedIdDeconstruct2 + "$" + clickedIdDeconstruct3 + "$" + "-1"
+
+        console.log("begin: " + clickedIdReconstruct1)
+
+        if (document.getElementById(clickedIdReconstruct1).innerHTML == "pm") {
+
+            document.getElementById(clickedIdReconstruct1).innerHTML = ""
+            document.getElementById("pmToggleButton").removeAttribute("style")
+            pmTogglable = true
+
+        } else if (document.getElementById(clickedIdReconstruct1).innerHTML == "-") {
+
+            document.getElementById("pmToggleButton").removeAttribute("style")
+            pmTogglable = true
+
+            //SEARCHING DOWN
+            var searchForPm = clickedIdReconstruct1
+
+            searchForPm1 = clickedIdReconstruct1.split("$")[0]
+            searchForPm2 = clickedIdReconstruct1.split("$")[1]
+            searchForPm3 = clickedIdReconstruct1.split("$")[2]
+
+            searchForPm1 = parseInt(searchForPm1)
+            searchForPm2 = parseInt(searchForPm2)
+            searchForPm3 = parseInt(searchForPm3)
+
+            tempSearchPm1 = searchForPm3
+            tempSearchPm2 = searchForPm2
+
+            while (document.getElementById(searchForPm).innerHTML != "pm") {
+                document.getElementById(searchForPm).innerHTML = "&nbsp;"
+                searchForPm = searchForPm1 + "$" + tempSearchPm2 + "$" + tempSearchPm1 + "$-1"
+
+                tempSearchPm1--
+
+                if (tempSearchPm1 == -1) {
+                    tempSearchPm1 = 15
+                    tempSearchPm2--
+                }
+            }
+
+            document.getElementById(searchForPm).innerHTML = "&nbsp;"
+
+            //SEARCHING UP
+            var searchForEnd = clickedIdReconstruct1
+
+            searchForEnd1 = clickedIdReconstruct1.split("$")[0]
+            searchForEnd2 = clickedIdReconstruct1.split("$")[1]
+            searchForEnd3 = clickedIdReconstruct1.split("$")[2]
+
+            searchForEnd1 = parseInt(searchForEnd1)
+            searchForEnd2 = parseInt(searchForEnd2)
+            searchForEnd3 = parseInt(searchForEnd3)
+
+            tempSearchEnd1 = searchForEnd3 + 1
+            tempSearchEnd2 = searchForEnd2
+
+            if (tempSearchEnd1 == 16) {
+                tempSearchEnd1 = -1
+                tempSearchEnd2++
+            }
+
+            console.log("TRYING TO FIND END")
+
+            while(document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
+
+                document.getElementById(searchForEnd).innerHTML = "&nbsp;"
+
+                searchForEnd = searchForEnd1 + "$" + tempSearchEnd2 + "$" + tempSearchEnd1 + "$-1"
+
+                tempSearchEnd1++
+
+                if (tempSearchEnd1 == 16) {
+                    tempSearchEnd1 = 0
+                    tempSearchEnd2++
+                }
+                console.log("LOOKING ID: " + searchForEnd)
+            }
+
+        } else {
+            pmCurrentWidth = document.getElementById(clickedIdReconstruct1).offsetWidth
+            document.getElementById(clickedIdReconstruct1).innerHTML = "pm"
+            document.getElementById(clickedIdReconstruct1).setAttribute("style", "box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px inset; border-radius: 10px; width: 12.73px; font-size: 0.9em; letter-spacing: -2px; font-kerning: normal; text-align: center; padding-left: 0px; padding-right: 0px;")
+        }
+
+
+
+
+    } else if (pmTogglable == false) {
+        //disable toggle
+        document.getElementById("pmToggleButton").removeAttribute("style")
+        pmTogglable = true
+
+        clickedIdDeconstruct4 = lastClickedId1.split("$")[0]
+        clickedIdDeconstruct5 = lastClickedId1.split("$")[1]
+        clickedIdDeconstruct6 = lastClickedId1.split("$")[2]
+
+        clickedIdDeconstruct4 = parseInt(clickedIdDeconstruct4)
+        clickedIdDeconstruct5 = parseInt(clickedIdDeconstruct5)
+        clickedIdDeconstruct6 = parseInt(clickedIdDeconstruct6)
+
+        clickedIdReconstruct2 = clickedIdDeconstruct4 + "$" + clickedIdDeconstruct5 + "$" + clickedIdDeconstruct6 + "$-1"
+
+        console.log("end: " + clickedIdReconstruct2)
+        document.getElementById(clickedIdReconstruct1).title = clickedIdReconstruct2
+
+        if (clickedIdReconstruct2 == clickedIdReconstruct1 || document.getElementById(clickedIdReconstruct2).innerHTML == "-") {
+            document.getElementById(clickedIdReconstruct2).innerHTML = "&nbsp;"
+        } else {
+            distanceToFill = clickedIdDeconstruct6 - clickedIdDeconstruct3
+            rowDistanceToFill = clickedIdDeconstruct5 - clickedIdDeconstruct2
+
+            rowCompensations = 0
+
+            if (rowDistanceToFill > 0) {
+                rowCompensations = rowDistanceToFill
+            }
+
+            if (distanceToFill > 0 || rowCompensations >= 1) {
+                for (x = clickedIdDeconstruct3; x != clickedIdDeconstruct6 + (rowCompensations * 16); x++) {
+                    tempId = x
+                    if (x >= 15) {
+                        tempId = tempId - 16
+                        rowCompensations--
+
+                        if (x == 15 || x == 31 || x == 47) {
+                            clickedIdDeconstruct2++
+                        }
+                    }
+
+                    if (x >= 31) {
+                        tempId = tempId - 16
+                        rowCompensations--
+                    }
+
+                    if (x >= 47) {
+                        tempId = tempId - 16
+                        rowCompensations--
+                    }
+
+                    clickedIdReconstruct3 = clickedIdDeconstruct1 + "$" + clickedIdDeconstruct2 + "$" + (tempId + 1) + "$-1"
+
+                    if (clickedIdReconstruct3.split("$")[1] == lastClickedId1.split("$")[1] && clickedIdReconstruct3.split("$")[2] == lastClickedId1.split("$")[2]) {
+                        break
+                    }
+
+                    console.log(clickedIdReconstruct3)
+                    document.getElementById(clickedIdReconstruct3).innerHTML = "-"
+                }
+            }
+        }
+    }
+}
+
+
+
 function lockNotes() {
     isLocked = !isLocked
 
@@ -481,6 +667,7 @@ function toggleNoteSelect(open, capo) {
 var lastClickedId1
 
 function rowLineClick(clickedId) {
+    globalCapoState = false
     toggleNoteSelect(1)
     console.log(clickedId)
 
