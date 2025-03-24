@@ -1,13 +1,31 @@
-var capoStorage = localStorage.getItem("capoStorage")
-var timeSigStorage = localStorage.getItem("timeSigStorage")
-var stringAmountStorage = localStorage.getItem("stringAmountStorage")
-var stringLetterStorage = localStorage.getItem("stringLetterStorage")
-var stringTuningStorage = localStorage.getItem("stringTuningStorage")
-var rowStorage = localStorage.getItem("rowStorage")
-var pmStorage = localStorage.getItem("pmStorage")
-var noteStorage = localStorage.getItem("noteStorage")
+//RETRIEVING SAVED DATA
 
+var userStorage = localStorage.getItem("userStorage")
 
+if (localStorage.getItem("userStorage") == null) {
+    console.log("Creating new database")
+
+    tempStorage = [0, 0, "scale8", "shape1", "string3", 1]
+    localStorage.setItem("userStorage", tempStorage)
+
+} else {
+    console.log("Existing database found:")
+    console.log(localStorage.getItem("userStorage").split(","))
+}
+
+userStorage = localStorage.getItem("userStorage").split(",")
+
+/*
+
+[0] = capo
+[1] = time signature
+[2] = string letter
+[3] = string scale
+[4] = string amount
+[5] = row amount
+[6+] = notes
+
+*/
 
 var menuToggle = 0
 
@@ -26,7 +44,6 @@ function contentMenu() {
         document.getElementById('contentLeft').style = null
         document.getElementById("contentLeft").style.height = document.getElementById("contentRight").offsetHeight + "px"
         document.getElementById('contentRight').style = null
-
 
         menuToggle = 0
     }
@@ -439,6 +456,7 @@ function noteSelect(content) {
     if (isLocked == false || content == "Close") {
         toggleNoteSelect(0)
         if (globalCapoState == true) {
+            document.getElementById("capoSelector").removeAttribute("style")
             globalCapoState = false
         }
     }
@@ -539,7 +557,7 @@ function pmToggle() {
 
             console.log("TRYING TO FIND END")
 
-            while(document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
+            while (document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
 
                 document.getElementById(searchForEnd).innerHTML = "&nbsp;"
 
@@ -626,6 +644,7 @@ function pmToggle() {
                 }
             }
         }
+        document.getElementById(clickedIdReconstruct2).innerHTML = "-"
     }
 }
 
@@ -654,6 +673,9 @@ var globalCapoState = false
 function toggleNoteSelect(open, capo) {
     if (capo == true) {
         globalCapoState = true
+        document.getElementById("capoSelector").style.backgroundColor = "#fff8"
+        document.getElementById("capoSelector").style.color = "#335"
+        document.getElementById("capoSelector").style.fontWeight = "500"
     }
 
     if (open == 0) {
@@ -668,6 +690,8 @@ var lastClickedId1
 
 function rowLineClick(clickedId) {
     globalCapoState = false
+    document.getElementById("capoSelector").removeAttribute("style")
+
     toggleNoteSelect(1)
     console.log(clickedId)
 
@@ -774,104 +798,109 @@ function shapeSelect(currentID) {
 
     currentShape = currentID
 
-    if (currentID == "shape1") {
-        if (currentScale == "scale1") {
-            scaleSelect("scale3")
-            loadTab("scale3", "temp", "temp")
-        } else
-            if (currentScale == "scale2") {
-                scaleSelect("scale4")
-                loadTab("scale4", "temp", "temp")
+    if (currentID != userStorage[3]) {
+        if (currentID == "shape1") {
+            if (currentScale == "scale1") {
+                scaleSelect("scale3")
+                loadTab("scale3", "temp", "temp")
             } else
-                if (currentScale == "scale3") {
-                    scaleSelect("scale5")
-                    loadTab("scale5", "temp", "temp")
+                if (currentScale == "scale2") {
+                    scaleSelect("scale4")
+                    loadTab("scale4", "temp", "temp")
                 } else
-                    if (currentScale == "scale4") {
-                        scaleSelect("scale6")
-                        loadTab("scale6", "temp", "temp")
+                    if (currentScale == "scale3") {
+                        scaleSelect("scale5")
+                        loadTab("scale5", "temp", "temp")
                     } else
-                        if (currentScale == "scale5") {
-                            scaleSelect("scale7")
-                            loadTab("scale7", "temp", "temp")
+                        if (currentScale == "scale4") {
+                            scaleSelect("scale6")
+                            loadTab("scale6", "temp", "temp")
                         } else
-                            if (currentScale == "scale6") {
-                                scaleSelect("scale8")
-                                loadTab("scale8", "temp", "temp")
+                            if (currentScale == "scale5") {
+                                scaleSelect("scale7")
+                                loadTab("scale7", "temp", "temp")
                             } else
-                                if (currentScale == "scale7") {
-                                    scaleSelect("scale9")
-                                    loadTab("scale9", "temp", "temp")
+                                if (currentScale == "scale6") {
+                                    scaleSelect("scale8")
+                                    loadTab("scale8", "temp", "temp")
                                 } else
-                                    if (currentScale == "scale8") {
-                                        scaleSelect("scale10")
-                                        loadTab("scale10", "temp", "temp")
+                                    if (currentScale == "scale7") {
+                                        scaleSelect("scale9")
+                                        loadTab("scale9", "temp", "temp")
                                     } else
-                                        if (currentScale == "scale9") {
-                                            scaleSelect("scale11")
-                                            loadTab("scale11", "temp", "temp")
+                                        if (currentScale == "scale8") {
+                                            scaleSelect("scale10")
+                                            loadTab("scale10", "temp", "temp")
                                         } else
-                                            if (currentScale == "scale10") {
-                                                scaleSelect("scale12")
-                                                loadTab("scale12", "temp", "temp")
+                                            if (currentScale == "scale9") {
+                                                scaleSelect("scale11")
+                                                loadTab("scale11", "temp", "temp")
                                             } else
-                                                if (currentScale == "scale11") {
-                                                    scaleSelect("scale1")
-                                                    loadTab("scale9", "temp", "temp")
+                                                if (currentScale == "scale10") {
+                                                    scaleSelect("scale12")
+                                                    loadTab("scale12", "temp", "temp")
                                                 } else
-                                                    if (currentScale == "scale12") {
-                                                        scaleSelect("scale2")
-                                                        loadTab("scale10", "temp", "temp")
-                                                    }
-    } else if (currentID == "shape2") {
-        if (currentScale == "scale1") {
-            scaleSelect("scale11")
-            loadTab("scale11", "temp", "temp")
-        } else
-            if (currentScale == "scale2") {
-                scaleSelect("scale12")
-                loadTab("scale12", "temp", "temp")
+                                                    if (currentScale == "scale11") {
+                                                        scaleSelect("scale1")
+                                                        loadTab("scale9", "temp", "temp")
+                                                    } else
+                                                        if (currentScale == "scale12") {
+                                                            scaleSelect("scale2")
+                                                            loadTab("scale10", "temp", "temp")
+                                                        }
+            userStorage[3] = "shape1"
+
+        } else if (currentID == "shape2") {
+            if (currentScale == "scale1") {
+                scaleSelect("scale11")
+                loadTab("scale11", "temp", "temp")
             } else
-                if (currentScale == "scale3") {
-                    scaleSelect("scale1")
-                    loadTab("scale1", "temp", "temp")
+                if (currentScale == "scale2") {
+                    scaleSelect("scale12")
+                    loadTab("scale12", "temp", "temp")
                 } else
-                    if (currentScale == "scale4") {
-                        scaleSelect("scale2")
-                        loadTab("scale2", "temp", "temp")
+                    if (currentScale == "scale3") {
+                        scaleSelect("scale1")
+                        loadTab("scale1", "temp", "temp")
                     } else
-                        if (currentScale == "scale5") {
-                            scaleSelect("scale3")
-                            loadTab("scale3", "temp", "temp")
+                        if (currentScale == "scale4") {
+                            scaleSelect("scale2")
+                            loadTab("scale2", "temp", "temp")
                         } else
-                            if (currentScale == "scale6") {
-                                scaleSelect("scale4")
-                                loadTab("scale4", "temp", "temp")
+                            if (currentScale == "scale5") {
+                                scaleSelect("scale3")
+                                loadTab("scale3", "temp", "temp")
                             } else
-                                if (currentScale == "scale7") {
-                                    scaleSelect("scale5")
-                                    loadTab("scale5", "temp", "temp")
+                                if (currentScale == "scale6") {
+                                    scaleSelect("scale4")
+                                    loadTab("scale4", "temp", "temp")
                                 } else
-                                    if (currentScale == "scale8") {
-                                        scaleSelect("scale6")
-                                        loadTab("scale6", "temp", "temp")
+                                    if (currentScale == "scale7") {
+                                        scaleSelect("scale5")
+                                        loadTab("scale5", "temp", "temp")
                                     } else
-                                        if (currentScale == "scale9") {
-                                            scaleSelect("scale7")
-                                            loadTab("scale7", "temp", "temp")
+                                        if (currentScale == "scale8") {
+                                            scaleSelect("scale6")
+                                            loadTab("scale6", "temp", "temp")
                                         } else
-                                            if (currentScale == "scale10") {
-                                                scaleSelect("scale8")
-                                                loadTab("scale8", "temp", "temp")
+                                            if (currentScale == "scale9") {
+                                                scaleSelect("scale7")
+                                                loadTab("scale7", "temp", "temp")
                                             } else
-                                                if (currentScale == "scale11") {
-                                                    scaleSelect("scale9")
-                                                    loadTab("scale9", "temp", "temp")
+                                                if (currentScale == "scale10") {
+                                                    scaleSelect("scale8")
+                                                    loadTab("scale8", "temp", "temp")
                                                 } else
-                                                    if (currentScale == "scale12") {
-                                                        scaleSelect("scale10")
-                                                        loadTab("scale10", "temp", "temp")
-                                                    }
+                                                    if (currentScale == "scale11") {
+                                                        scaleSelect("scale9")
+                                                        loadTab("scale9", "temp", "temp")
+                                                    } else
+                                                        if (currentScale == "scale12") {
+                                                            scaleSelect("scale10")
+                                                            loadTab("scale10", "temp", "temp")
+                                                        }
+            userStorage[3] = "shape2"
+        }
     }
 }
 
@@ -968,3 +997,55 @@ function timeSigSelect() {
 
     loadTab()
 }
+
+
+
+
+
+
+//USING SAVED DATA FOUND AT LINE 1
+
+/*
+
+tempStorage[x]
+
+[0] = capo
+[1] = time signature
+[2] = string letter
+[3] = string scale
+[4] = string amount
+[5] = row amount
+[6+] = notes
+
+*/
+
+async function loadSave() {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // update capo
+    globalCapoState = true
+    noteSelect(userStorage[0])
+
+    // update time signature
+    timeSig = userStorage[1] - 1
+    timeSigSelect()
+
+    // update string letter
+    scaleSelect(userStorage[2])
+    loadTab(userStorage[2], 'temp', 'temp')
+
+    // update scale
+    shapeSelect(userStorage[3])
+    loadTab('temp', userStorage[3], 'temp')
+
+    // update string data
+    scaleSelect(userStorage[2])
+    shapeSelect(userStorage[3])
+    stringSelect(userStorage[4])
+    loadTab(userStorage[2], userStorage[3], userStorage[4])
+
+    //update row amount
+    rowAmount = userStorage[5]
+    loadTab()
+}
+loadSave()
