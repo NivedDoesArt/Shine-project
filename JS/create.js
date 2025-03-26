@@ -1,23 +1,44 @@
+Array.prototype.remove = function () {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
 //RETRIEVING SAVED DATA
 
 var userStorage = localStorage.getItem("userStorage")
+var capoValue = "none"
+var currentlySaving = false
 
-if (localStorage.getItem("userStorage") == null) {
-    console.log("Creating new database")
+function databaseCheck() {
+    if (localStorage.getItem("userStorage") == null) {
+        console.log("Creating new database")
 
-    tempStorage = [0, 0, "scale8", "shape1", "string3", 1]
-    localStorage.setItem("userStorage", tempStorage)
+        tempStorage = ["none", 0, "scale8", "shape1", "string3", 1]
+        localStorage.setItem("userStorage", tempStorage)
+        capoValue = "none"
 
-} else {
-    console.log("Existing database found:")
-    console.log(localStorage.getItem("userStorage").split(","))
+    } else {
+        console.log("Existing database found:")
+        console.log(localStorage.getItem("userStorage").split(","))
+        capoValue = localStorage.getItem("userStorage").split(",")[0]
+        if (capoValue == 0) {
+            capoValue = "none"
+        }
+    }
 }
+databaseCheck()
 
 userStorage = localStorage.getItem("userStorage").split(",")
 
 /*
 
-[0] = capo
+[0] = capo (either "none" or 1>24)
 [1] = time signature
 [2] = string letter
 [3] = string scale
@@ -109,7 +130,6 @@ var value2
 var value3
 
 var rowAmount = 1
-var capoValue = "none"
 var timesigValue = "4/4"
 
 function loadTab(scale, shape, string) {
@@ -296,6 +316,8 @@ function loadTab(scale, shape, string) {
 
     document.getElementById("contentLeft").style.height = document.getElementById("contentRight").offsetHeight + "px"
     document.getElementById("content").style.height = document.getElementById("contentRight").offsetHeight + "px"
+
+    loadNotes()
 }
 loadTab("scale8", "shape1", "string3")
 
@@ -417,6 +439,50 @@ function noteSelect(content) {
             document.getElementById(clickedStringID).style = null
 
             document.getElementById(clickedStringID).removeAttribute("title")
+
+            if (currentlySaving == false) {
+                for (x = 0; x < 25; x++) {
+                    if (userStorage.includes("n!" + x + "!" + clickedStringID)) {
+                        userStorage.remove("n!" + x + "!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+                }
+
+                if (userStorage.includes("n!x!" + clickedStringID)) {
+                    userStorage.remove("n!x!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!/!" + clickedStringID)) {
+                    userStorage.remove("n!/!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!\\!" + clickedStringID)) {
+                    userStorage.remove("n!\\!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!h!" + clickedStringID)) {
+                    userStorage.remove("n!h!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!p!" + clickedStringID)) {
+                    userStorage.remove("n!p!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!b!" + clickedStringID)) {
+                    userStorage.remove("n!b!" + clickedStringID)
+                    console.log(userStorage)
+                }
+
+                if (userStorage.includes("n!~!" + clickedStringID)) {
+                    userStorage.remove("n!~!" + clickedStringID)
+                    console.log(userStorage)
+                }
+            }
         }
         else if (content == "PM") {
             pmToggle();
@@ -425,17 +491,69 @@ function noteSelect(content) {
 
         }
         else {
-            var currentNoteWidth = document.getElementById(clickedStringID).offsetWidth - 0.27
+            if (document.getElementById(clickedStringID) && document.getElementById(clickedStringID).innerHTML != "-") {
+                if (currentlySaving == false) {
+                    for (x = 0; x < 25; x++) {
+                        if (userStorage.includes("n!" + x + "!" + clickedStringID)) {
+                            userStorage.remove("n!" + x + "!" + clickedStringID)
+                            console.log(userStorage)
+                        }
+                    }
 
+                    if (userStorage.includes("n!x!" + clickedStringID)) {
+                        userStorage.remove("n!x!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!/!" + clickedStringID)) {
+                        userStorage.remove("n!/!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!\\!" + clickedStringID)) {
+                        userStorage.remove("n!\\!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!h!" + clickedStringID)) {
+                        userStorage.remove("n!h!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!p!" + clickedStringID)) {
+                        userStorage.remove("n!p!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!b!" + clickedStringID)) {
+                        userStorage.remove("n!b!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+
+                    if (userStorage.includes("n!~!" + clickedStringID)) {
+                        userStorage.remove("n!~!" + clickedStringID)
+                        console.log(userStorage)
+                    }
+                }
+            }
+
+            if (document.getElementById(clickedStringID)) {
             document.getElementById(clickedStringID).innerHTML = content
             document.getElementById(clickedStringID).title = content
-            document.getElementById(clickedStringID).style.width = currentNoteWidth + "px"
+            document.getElementById(clickedStringID).style.width = "0.885em"
             document.getElementById(clickedStringID).style.fontSize = "0.9em"
             document.getElementById(clickedStringID).style.letterSpacing = "-2px"
             document.getElementById(clickedStringID).style.fontKerning = "normal"
             document.getElementById(clickedStringID).style.textAlign = "center"
             document.getElementById(clickedStringID).style.paddingLeft = "0px"
             document.getElementById(clickedStringID).style.paddingRight = "0px"
+            document.getElementById(clickedStringID).style.textWrap = "noWrap"
+            }
+
+            if (currentlySaving == false) {
+                userStorage.push("n!" + content + "!" + clickedStringID)
+                console.log(userStorage)
+            }
         }
     } else {
         if (content == "Delete" || content == "0" || content == "PM" || content == "x" || content == "/" || content == "\\" || content == "b" || content == "h" || content == "p" || content == "~") {
@@ -443,6 +561,10 @@ function noteSelect(content) {
             document.getElementById("noteSelectStringCapo").style.width = "0px"
             capoValue = "none"
             loadTab()
+            if (content == "Delete" || content == "0") {
+                userStorage[0] = "none"
+                console.log(userStorage)
+            }
         }
 
         else if (content != "Close") {
@@ -450,6 +572,9 @@ function noteSelect(content) {
             document.getElementById("noteSelectStringCapo").style.width = "calc(" + content + " * (100% / 26.1))"
             capoValue = content
             document.getElementById("tabCapoId").innerHTML = "Capo: " + capoValue
+
+            userStorage[0] = content
+            console.log(userStorage)
         }
     }
 
@@ -464,7 +589,6 @@ function noteSelect(content) {
 
 
 
-var pmTogglable = true
 
 /*
 var clickedIdDeconstruct1
@@ -478,6 +602,9 @@ var clickedIdReconstruct1
 var clickedIdReconstruct2
 var clickedIdReconstruct3
 */
+
+var pmTogglable = true
+var constructData
 
 function pmToggle() {
     if (pmTogglable == true) {
@@ -495,15 +622,11 @@ function pmToggle() {
 
         clickedIdReconstruct1 = clickedIdDeconstruct1 + "$" + clickedIdDeconstruct2 + "$" + clickedIdDeconstruct3 + "$" + "-1"
 
+        constructData = "pm!" + clickedIdReconstruct1 + "*"
+
         console.log("begin: " + clickedIdReconstruct1)
 
-        if (document.getElementById(clickedIdReconstruct1).innerHTML == "pm") {
-
-            document.getElementById(clickedIdReconstruct1).innerHTML = ""
-            document.getElementById("pmToggleButton").removeAttribute("style")
-            pmTogglable = true
-
-        } else if (document.getElementById(clickedIdReconstruct1).innerHTML == "-") {
+        if (document.getElementById(clickedIdReconstruct1).innerHTML == "-" || document.getElementById(clickedIdReconstruct1).innerHTML == "pm") {
 
             document.getElementById("pmToggleButton").removeAttribute("style")
             pmTogglable = true
@@ -524,6 +647,7 @@ function pmToggle() {
 
             while (document.getElementById(searchForPm).innerHTML != "pm") {
                 document.getElementById(searchForPm).innerHTML = "&nbsp;"
+                document.getElementById(searchForPm).removeAttribute("style")
                 searchForPm = searchForPm1 + "$" + tempSearchPm2 + "$" + tempSearchPm1 + "$-1"
 
                 tempSearchPm1--
@@ -559,7 +683,9 @@ function pmToggle() {
 
             while (document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
 
-                document.getElementById(searchForEnd).innerHTML = "&nbsp;"
+                if (document.getElementById(searchForEnd)) {
+                    document.getElementById(searchForEnd).innerHTML = "&nbsp;"
+                }
 
                 searchForEnd = searchForEnd1 + "$" + tempSearchEnd2 + "$" + tempSearchEnd1 + "$-1"
 
@@ -571,6 +697,8 @@ function pmToggle() {
                 }
                 console.log("LOOKING ID: " + searchForEnd)
             }
+
+            document.getElementById(clickedIdReconstruct1).innerHTML = ""
 
         } else {
             pmCurrentWidth = document.getElementById(clickedIdReconstruct1).offsetWidth
@@ -596,6 +724,9 @@ function pmToggle() {
 
         clickedIdReconstruct2 = clickedIdDeconstruct4 + "$" + clickedIdDeconstruct5 + "$" + clickedIdDeconstruct6 + "$-1"
 
+        constructData = constructData + clickedIdReconstruct2
+        userStorage.push(constructData)
+
         console.log("end: " + clickedIdReconstruct2)
         document.getElementById(clickedIdReconstruct1).title = clickedIdReconstruct2
 
@@ -614,7 +745,7 @@ function pmToggle() {
             if (distanceToFill > 0 || rowCompensations >= 1) {
                 for (x = clickedIdDeconstruct3; x != clickedIdDeconstruct6 + (rowCompensations * 16); x++) {
                     tempId = x
-                    if (x >= 15) {
+                    if (x >= (rowLineAmount * 2) - 1) {
                         tempId = tempId - 16
                         rowCompensations--
 
@@ -646,6 +777,8 @@ function pmToggle() {
         }
         document.getElementById(clickedIdReconstruct2).innerHTML = "-"
     }
+
+    console.log("Data: " + constructData)
 }
 
 
@@ -749,6 +882,7 @@ function scaleSelect(currentID) {
     document.getElementById("selectedScale").innerHTML = document.getElementById(currentID).innerHTML
 
     currentScale = currentID
+    userStorage[2] = currentID
 }
 
 
@@ -848,7 +982,7 @@ function shapeSelect(currentID) {
                                                             scaleSelect("scale2")
                                                             loadTab("scale10", "temp", "temp")
                                                         }
-            userStorage[3] = "shape1"
+            recommendedShape = "shape1"
 
         } else if (currentID == "shape2") {
             if (currentScale == "scale1") {
@@ -899,8 +1033,9 @@ function shapeSelect(currentID) {
                                                             scaleSelect("scale10")
                                                             loadTab("scale10", "temp", "temp")
                                                         }
-            userStorage[3] = "shape2"
+            recommendedShape = "shape2"
         }
+        userStorage[3] = recommendedShape
     }
 }
 
@@ -951,17 +1086,32 @@ function stringSelect(currentID) {
     document.getElementById("selectedString").innerHTML = document.getElementById(currentID).innerHTML
 
     currentString = currentID
+    userStorage[4] = currentID
 }
 
 
 
-function increaseRow(amount) {
-    rowAmount = rowAmount + amount
-    if (rowAmount < 1) {
-        rowAmount = 1
+function increaseRow() {
+    if (currentlySaving == false) {
+        rowAmount++
+        loadTab()
+
+        userStorage[5] = rowAmount
     }
-    loadTab()
 }
+
+function decreaseRow() {
+    if (currentlySaving == false) {
+        rowAmount--
+        if (rowAmount < 1) {
+            rowAmount = 1
+        }
+        loadTab()
+
+        userStorage[5] = rowAmount
+    }
+}
+
 
 
 
@@ -969,6 +1119,7 @@ var timeSig = 0
 
 function timeSigSelect() {
     timeSig++
+    userStorage[1] = timeSig
 
     if (timeSig == 0) {
         document.getElementById("timeSig").innerHTML = "Time signature: 4/4"
@@ -1019,9 +1170,45 @@ tempStorage[x]
 
 */
 
-async function loadSave() {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+async function loadNotes() {
+    currentlySaving = true
+    globalCapoState = false
+    await new Promise(resolve => setTimeout(resolve, 100));
+    // load in all the user written notes
+    for (l = 6; l < userStorage.length; l++) {
 
+        //IF FOUND IS NOTE
+        if (userStorage[l].split("!")[0] == "n") {
+            console.log("FOUND A NOTE")
+
+            tempNote = userStorage[l].split("!")[1]
+            tempId = userStorage[l].split("!")[2]
+
+            lastClickedId1 = tempId
+            clickedStringID = tempId
+
+            console.log(tempNote, tempId)
+            noteSelect(tempNote)
+        }
+
+        //IF FOUND IS PM
+        if (userStorage[l].split("!")[0] == "pm") {
+            console.log("FOUND A PALM MUTE")
+
+
+        }
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+    currentlySaving = false
+}
+
+async function loadSave() {
+    noteSelect("Close")
+    currentlySaving = true
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    userStorage = localStorage.getItem("userStorage").split(",")
     // update capo
     globalCapoState = true
     noteSelect(userStorage[0])
@@ -1030,22 +1217,31 @@ async function loadSave() {
     timeSig = userStorage[1] - 1
     timeSigSelect()
 
-    // update string letter
-    scaleSelect(userStorage[2])
-    loadTab(userStorage[2], 'temp', 'temp')
-
-    // update scale
-    shapeSelect(userStorage[3])
-    loadTab('temp', userStorage[3], 'temp')
-
     // update string data
     scaleSelect(userStorage[2])
     shapeSelect(userStorage[3])
     stringSelect(userStorage[4])
     loadTab(userStorage[2], userStorage[3], userStorage[4])
 
-    //update row amount
+    // update row amount
     rowAmount = userStorage[5]
     loadTab()
+
+
+    // reset UI
+    await new Promise(resolve => setTimeout(resolve, 100));
+    globalCapoState = false
+    loadNotes()
+
+    currentlySaving = false
 }
 loadSave()
+
+
+
+function saveProject() {
+    localStorage.setItem("userStorage", userStorage)
+    console.log(localStorage.getItem("userStorage"))
+
+    loadSave()
+}

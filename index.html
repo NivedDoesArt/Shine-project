@@ -37,9 +37,10 @@
 
             <h2 onclick="toggleNoteSelect(1, true)" id="capoSelector">Capo: none</h2>
             <h2 onclick="timeSigSelect()" id="timeSig">Time signature: 4/4</h2>
-            <h2>Save/export</h2>
-            <h2>Load</h2>
-            <h2 onclick="localStorage.clear()">Reset</h2>
+            <h2 style="margin-top: 50px;" onclick="saveProject()">Save current</h2>
+            <h2 onclick="loadSave()">Load last</h2>
+            <h2 onclick="localStorage.clear(); databaseCheck(); loadSave()">Clear save</h2>
+            <h2>Empty tab</h2>
         </div>
 
         <div id="contentRight">
@@ -91,11 +92,11 @@
                     </ul>
 
                     <div id="rowAmount">
-                        <button onclick="increaseRow(1)">
+                        <button onclick="increaseRow()">
                             Row +
                         </button>
 
-                        <button onclick="increaseRow(-1)">
+                        <button onclick="decreaseRow()">
                             Row -
                         </button>
                     </div>
