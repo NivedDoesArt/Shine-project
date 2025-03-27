@@ -14,6 +14,7 @@ Array.prototype.remove = function () {
 var userStorage = localStorage.getItem("userStorage")
 var capoValue = "none"
 var currentlySaving = false
+var foundNotes = [];
 
 function databaseCheck() {
     if (localStorage.getItem("userStorage") == null) {
@@ -538,16 +539,16 @@ function noteSelect(content) {
             }
 
             if (document.getElementById(clickedStringID)) {
-            document.getElementById(clickedStringID).innerHTML = content
-            document.getElementById(clickedStringID).title = content
-            document.getElementById(clickedStringID).style.width = "0.885em"
-            document.getElementById(clickedStringID).style.fontSize = "0.9em"
-            document.getElementById(clickedStringID).style.letterSpacing = "-2px"
-            document.getElementById(clickedStringID).style.fontKerning = "normal"
-            document.getElementById(clickedStringID).style.textAlign = "center"
-            document.getElementById(clickedStringID).style.paddingLeft = "0px"
-            document.getElementById(clickedStringID).style.paddingRight = "0px"
-            document.getElementById(clickedStringID).style.textWrap = "noWrap"
+                document.getElementById(clickedStringID).innerHTML = content
+                document.getElementById(clickedStringID).title = content
+                document.getElementById(clickedStringID).style.width = "0.885em"
+                document.getElementById(clickedStringID).style.fontSize = "0.9em"
+                document.getElementById(clickedStringID).style.letterSpacing = "-2px"
+                document.getElementById(clickedStringID).style.fontKerning = "normal"
+                document.getElementById(clickedStringID).style.textAlign = "center"
+                document.getElementById(clickedStringID).style.paddingLeft = "0px"
+                document.getElementById(clickedStringID).style.paddingRight = "0px"
+                document.getElementById(clickedStringID).style.textWrap = "noWrap"
             }
 
             if (currentlySaving == false) {
@@ -626,84 +627,86 @@ function pmToggle() {
 
         console.log("begin: " + clickedIdReconstruct1)
 
-        if (document.getElementById(clickedIdReconstruct1).innerHTML == "-" || document.getElementById(clickedIdReconstruct1).innerHTML == "pm") {
+        if (document.getElementById(clickedIdReconstruct1)) {
+            if (document.getElementById(clickedIdReconstruct1).innerHTML == "-" || document.getElementById(clickedIdReconstruct1).innerHTML == "pm") {
 
-            document.getElementById("pmToggleButton").removeAttribute("style")
-            pmTogglable = true
+                document.getElementById("pmToggleButton").removeAttribute("style")
+                pmTogglable = true
 
-            //SEARCHING DOWN
-            var searchForPm = clickedIdReconstruct1
+                //SEARCHING DOWN
+                var searchForPm = clickedIdReconstruct1
 
-            searchForPm1 = clickedIdReconstruct1.split("$")[0]
-            searchForPm2 = clickedIdReconstruct1.split("$")[1]
-            searchForPm3 = clickedIdReconstruct1.split("$")[2]
+                searchForPm1 = clickedIdReconstruct1.split("$")[0]
+                searchForPm2 = clickedIdReconstruct1.split("$")[1]
+                searchForPm3 = clickedIdReconstruct1.split("$")[2]
 
-            searchForPm1 = parseInt(searchForPm1)
-            searchForPm2 = parseInt(searchForPm2)
-            searchForPm3 = parseInt(searchForPm3)
+                searchForPm1 = parseInt(searchForPm1)
+                searchForPm2 = parseInt(searchForPm2)
+                searchForPm3 = parseInt(searchForPm3)
 
-            tempSearchPm1 = searchForPm3
-            tempSearchPm2 = searchForPm2
+                tempSearchPm1 = searchForPm3
+                tempSearchPm2 = searchForPm2
 
-            while (document.getElementById(searchForPm).innerHTML != "pm") {
+                while (document.getElementById(searchForPm).innerHTML != "pm") {
+                    document.getElementById(searchForPm).innerHTML = "&nbsp;"
+                    document.getElementById(searchForPm).removeAttribute("style")
+                    searchForPm = searchForPm1 + "$" + tempSearchPm2 + "$" + tempSearchPm1 + "$-1"
+
+                    tempSearchPm1--
+
+                    if (tempSearchPm1 == -1) {
+                        tempSearchPm1 = 15
+                        tempSearchPm2--
+                    }
+                }
+
                 document.getElementById(searchForPm).innerHTML = "&nbsp;"
-                document.getElementById(searchForPm).removeAttribute("style")
-                searchForPm = searchForPm1 + "$" + tempSearchPm2 + "$" + tempSearchPm1 + "$-1"
 
-                tempSearchPm1--
+                //SEARCHING UP
+                var searchForEnd = clickedIdReconstruct1
 
-                if (tempSearchPm1 == -1) {
-                    tempSearchPm1 = 15
-                    tempSearchPm2--
-                }
-            }
+                searchForEnd1 = clickedIdReconstruct1.split("$")[0]
+                searchForEnd2 = clickedIdReconstruct1.split("$")[1]
+                searchForEnd3 = clickedIdReconstruct1.split("$")[2]
 
-            document.getElementById(searchForPm).innerHTML = "&nbsp;"
+                searchForEnd1 = parseInt(searchForEnd1)
+                searchForEnd2 = parseInt(searchForEnd2)
+                searchForEnd3 = parseInt(searchForEnd3)
 
-            //SEARCHING UP
-            var searchForEnd = clickedIdReconstruct1
-
-            searchForEnd1 = clickedIdReconstruct1.split("$")[0]
-            searchForEnd2 = clickedIdReconstruct1.split("$")[1]
-            searchForEnd3 = clickedIdReconstruct1.split("$")[2]
-
-            searchForEnd1 = parseInt(searchForEnd1)
-            searchForEnd2 = parseInt(searchForEnd2)
-            searchForEnd3 = parseInt(searchForEnd3)
-
-            tempSearchEnd1 = searchForEnd3 + 1
-            tempSearchEnd2 = searchForEnd2
-
-            if (tempSearchEnd1 == 16) {
-                tempSearchEnd1 = -1
-                tempSearchEnd2++
-            }
-
-            console.log("TRYING TO FIND END")
-
-            while (document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
-
-                if (document.getElementById(searchForEnd)) {
-                    document.getElementById(searchForEnd).innerHTML = "&nbsp;"
-                }
-
-                searchForEnd = searchForEnd1 + "$" + tempSearchEnd2 + "$" + tempSearchEnd1 + "$-1"
-
-                tempSearchEnd1++
+                tempSearchEnd1 = searchForEnd3 + 1
+                tempSearchEnd2 = searchForEnd2
 
                 if (tempSearchEnd1 == 16) {
-                    tempSearchEnd1 = 0
+                    tempSearchEnd1 = -1
                     tempSearchEnd2++
                 }
-                console.log("LOOKING ID: " + searchForEnd)
+
+                console.log("TRYING TO FIND END")
+
+                while (document.getElementById(searchForEnd).innerHTML == "&nbsp;" || document.getElementById(searchForEnd).innerHTML == "-") {
+
+                    if (document.getElementById(searchForEnd)) {
+                        document.getElementById(searchForEnd).innerHTML = "&nbsp;"
+                    }
+
+                    searchForEnd = searchForEnd1 + "$" + tempSearchEnd2 + "$" + tempSearchEnd1 + "$-1"
+
+                    tempSearchEnd1++
+
+                    if (tempSearchEnd1 == 16) {
+                        tempSearchEnd1 = 0
+                        tempSearchEnd2++
+                    }
+                    console.log("LOOKING ID: " + searchForEnd)
+                }
+
+                document.getElementById(clickedIdReconstruct1).innerHTML = ""
+
+            } else {
+                pmCurrentWidth = document.getElementById(clickedIdReconstruct1).offsetWidth
+                document.getElementById(clickedIdReconstruct1).innerHTML = "pm"
+                document.getElementById(clickedIdReconstruct1).setAttribute("style", "box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px inset; border-radius: 10px; width: 12.73px; font-size: 0.9em; letter-spacing: -2px; font-kerning: normal; text-align: center; padding-left: 0px; padding-right: 0px;")
             }
-
-            document.getElementById(clickedIdReconstruct1).innerHTML = ""
-
-        } else {
-            pmCurrentWidth = document.getElementById(clickedIdReconstruct1).offsetWidth
-            document.getElementById(clickedIdReconstruct1).innerHTML = "pm"
-            document.getElementById(clickedIdReconstruct1).setAttribute("style", "box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px inset; border-radius: 10px; width: 12.73px; font-size: 0.9em; letter-spacing: -2px; font-kerning: normal; text-align: center; padding-left: 0px; padding-right: 0px;")
         }
 
 
@@ -725,57 +728,61 @@ function pmToggle() {
         clickedIdReconstruct2 = clickedIdDeconstruct4 + "$" + clickedIdDeconstruct5 + "$" + clickedIdDeconstruct6 + "$-1"
 
         constructData = constructData + clickedIdReconstruct2
-        userStorage.push(constructData)
 
+        if (userStorage.includes(constructData) == false) {
+            userStorage.push(constructData)
+        }
         console.log("end: " + clickedIdReconstruct2)
         document.getElementById(clickedIdReconstruct1).title = clickedIdReconstruct2
 
-        if (clickedIdReconstruct2 == clickedIdReconstruct1 || document.getElementById(clickedIdReconstruct2).innerHTML == "-") {
-            document.getElementById(clickedIdReconstruct2).innerHTML = "&nbsp;"
-        } else {
-            distanceToFill = clickedIdDeconstruct6 - clickedIdDeconstruct3
-            rowDistanceToFill = clickedIdDeconstruct5 - clickedIdDeconstruct2
+        if (document.getElementById(clickedIdReconstruct2)) {
+            if (clickedIdReconstruct2 == clickedIdReconstruct1 || document.getElementById(clickedIdReconstruct2).innerHTML == "-") {
+                document.getElementById(clickedIdReconstruct2).innerHTML = "&nbsp;"
+            } else {
+                distanceToFill = clickedIdDeconstruct6 - clickedIdDeconstruct3
+                rowDistanceToFill = clickedIdDeconstruct5 - clickedIdDeconstruct2
 
-            rowCompensations = 0
+                rowCompensations = 0
 
-            if (rowDistanceToFill > 0) {
-                rowCompensations = rowDistanceToFill
-            }
+                if (rowDistanceToFill > 0) {
+                    rowCompensations = rowDistanceToFill
+                }
 
-            if (distanceToFill > 0 || rowCompensations >= 1) {
-                for (x = clickedIdDeconstruct3; x != clickedIdDeconstruct6 + (rowCompensations * 16); x++) {
-                    tempId = x
-                    if (x >= (rowLineAmount * 2) - 1) {
-                        tempId = tempId - 16
-                        rowCompensations--
+                if (distanceToFill > 0 || rowCompensations >= 1) {
+                    for (x = clickedIdDeconstruct3; x != clickedIdDeconstruct6 + (rowCompensations * 16); x++) {
+                        tempId = x
+                        if (x >= (rowLineAmount * 2) - 1) {
+                            tempId = tempId - 16
+                            rowCompensations--
 
-                        if (x == 15 || x == 31 || x == 47) {
-                            clickedIdDeconstruct2++
+                            if (x == 15 || x == 31 || x == 47) {
+                                clickedIdDeconstruct2++
+                            }
                         }
+
+                        if (x >= 31) {
+                            tempId = tempId - 16
+                            rowCompensations--
+                        }
+
+                        if (x >= 47) {
+                            tempId = tempId - 16
+                            rowCompensations--
+                        }
+
+                        clickedIdReconstruct3 = clickedIdDeconstruct1 + "$" + clickedIdDeconstruct2 + "$" + (tempId + 1) + "$-1"
+
+                        if (clickedIdReconstruct3.split("$")[1] == lastClickedId1.split("$")[1] && clickedIdReconstruct3.split("$")[2] == lastClickedId1.split("$")[2]) {
+                            break
+                        }
+
+                        console.log(clickedIdReconstruct3)
+                        document.getElementById(clickedIdReconstruct3).innerHTML = "-"
                     }
-
-                    if (x >= 31) {
-                        tempId = tempId - 16
-                        rowCompensations--
-                    }
-
-                    if (x >= 47) {
-                        tempId = tempId - 16
-                        rowCompensations--
-                    }
-
-                    clickedIdReconstruct3 = clickedIdDeconstruct1 + "$" + clickedIdDeconstruct2 + "$" + (tempId + 1) + "$-1"
-
-                    if (clickedIdReconstruct3.split("$")[1] == lastClickedId1.split("$")[1] && clickedIdReconstruct3.split("$")[2] == lastClickedId1.split("$")[2]) {
-                        break
-                    }
-
-                    console.log(clickedIdReconstruct3)
-                    document.getElementById(clickedIdReconstruct3).innerHTML = "-"
                 }
             }
+            document.getElementById(clickedIdReconstruct2).innerHTML = "-"
         }
-        document.getElementById(clickedIdReconstruct2).innerHTML = "-"
     }
 
     console.log("Data: " + constructData)
@@ -1097,6 +1104,7 @@ function increaseRow() {
         loadTab()
 
         userStorage[5] = rowAmount
+        foundNotes = [];
     }
 }
 
@@ -1109,6 +1117,7 @@ function decreaseRow() {
         loadTab()
 
         userStorage[5] = rowAmount
+        foundNotes = [];
     }
 }
 
@@ -1157,9 +1166,9 @@ function timeSigSelect() {
 //USING SAVED DATA FOUND AT LINE 1
 
 /*
-
+ 
 tempStorage[x]
-
+ 
 [0] = capo
 [1] = time signature
 [2] = string letter
@@ -1167,12 +1176,13 @@ tempStorage[x]
 [4] = string amount
 [5] = row amount
 [6+] = notes
-
+ 
 */
 
 async function loadNotes() {
     currentlySaving = true
     globalCapoState = false
+
     await new Promise(resolve => setTimeout(resolve, 100));
     // load in all the user written notes
     for (l = 6; l < userStorage.length; l++) {
@@ -1195,7 +1205,24 @@ async function loadNotes() {
         if (userStorage[l].split("!")[0] == "pm") {
             console.log("FOUND A PALM MUTE")
 
+            if (!foundNotes.includes(userStorage[l].split("!")[1])) {
 
+                foundNotes.push(userStorage[l].split("!")[1])
+
+                tempNote = userStorage[l].split("!")[1]
+                tempId1 = tempNote.split("*")[0]
+                tempId2 = tempNote.split("*")[1]
+
+                lastClickedId1 = tempId1
+                clickedStringID = tempId1
+
+                pmToggle()
+
+                lastClickedId1 = tempId2
+                clickedStringID = tempId2
+
+                pmToggle()
+            }
         }
     }
     await new Promise(resolve => setTimeout(resolve, 100));
@@ -1205,8 +1232,10 @@ async function loadNotes() {
 async function loadSave() {
     noteSelect("Close")
     currentlySaving = true
+    foundNotes = [];
 
     await new Promise(resolve => setTimeout(resolve, 500));
+    foundNotes = [];
 
     userStorage = localStorage.getItem("userStorage").split(",")
     // update capo
