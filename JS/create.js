@@ -17,19 +17,38 @@ var currentlySaving = false
 var foundNotes = [];
 
 function databaseCheck() {
-    if (localStorage.getItem("userStorage") == null) {
-        console.log("Creating new database")
+    if (location.hash == "#1") {
+        //buddy holly solo
 
-        tempStorage = ["none", 0, "scale8", "shape1", "string3", 1]
-        localStorage.setItem("userStorage", tempStorage)
-        capoValue = "none"
+    } else if (location.hash == "#2") {
+        //Boys will be bugs
 
+    } else if (location.hash == "#3") {
+        //Walkie Talkie Man
+
+    } else if (location.hash == "#4") {
+        //Don't stop me now (solo)
+
+    } else if (location.hash == "#5") {
+        //Scotty doesn't know
+        console.log("SCOTTY DOESN'T KNOW")
+        userStorage = ['none', 0, 'scale8', 'shape1', 'string3', '2', 'n!5!0$0$6$3', 'n!5!0$0$14$3', 'n!5!0$1$6$3', 'n!5!0$1$14$3', 'n!5!0$2$6$3', 'n!5!0$2$14$3', 'n!5!0$3$6$3', 'n!5!0$3$14$3', 'n!5!0$0$12$3', 'n!5!0$1$12$3', 'n!5!0$2$12$3', 'n!5!0$3$12$3', 'n!4!0$1$8$3', 'n!4!0$3$8$3', 'n!7!0$3$0$3', 'n!3!0$0$0$5', 'n!4!0$0$10$3', 'n!4!0$1$10$3', 'n!4!0$2$10$3', 'n!4!0$3$10$3', 'n!5!0$1$4$3', 'n!5!0$3$4$3', 'n!4!0$2$8$3', 'n!3!0$2$0$4', 'n!5!0$1$2$5', 'n!7!0$3$2$3', 'n!5!0$2$4$3', 'n!5!0$1$0$5', 'n!3!0$2$2$4', 'n!4!0$0$8$3', 'n!5!0$0$4$3', 'n!3!0$0$2$5']
+        localStorage.setItem("userStorage", userStorage)
     } else {
-        console.log("Existing database found:")
-        console.log(localStorage.getItem("userStorage").split(","))
-        capoValue = localStorage.getItem("userStorage").split(",")[0]
-        if (capoValue == 0) {
+        if (localStorage.getItem("userStorage") == null) {
+            console.log("Creating new database")
+
+            tempStorage = ["none", 0, "scale8", "shape1", "string3", 1]
+            localStorage.setItem("userStorage", tempStorage)
             capoValue = "none"
+
+        } else {
+            console.log("Existing database found:")
+            console.log(localStorage.getItem("userStorage").split(","))
+            capoValue = localStorage.getItem("userStorage").split(",")[0]
+            if (capoValue == 0) {
+                capoValue = "none"
+            }
         }
     }
 }
