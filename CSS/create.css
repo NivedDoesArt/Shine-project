@@ -208,7 +208,6 @@
 
 .tabColumn p {
     font-family: "Anonymous Pro", serif !important;
-    font-weight: 400 !important;
     font-style: normal !important;
 }
 
@@ -224,6 +223,7 @@
     float: left;
 
     cursor: pointer;
+    font-weight: 400 !important;
 
     transition: all 0.1s;
 }
@@ -363,6 +363,8 @@
     padding-right: 1px;
     width: fit-content;
     float: left;
+
+    font-weight: 800 !important;
 
     transition: all 0.1s;
 }
