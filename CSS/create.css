@@ -368,3 +368,69 @@
 
     transition: all 0.1s;
 }
+
+
+
+#actionConfirm {
+    z-index: -1;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0004;
+    opacity: 0%;
+
+    transition: opacity 0.5s;
+}
+
+.actionConfirmHolder {
+    width: fit-content;
+    padding: 1em;
+
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px #0008;
+}
+
+.actionConfirmHolder h1 {
+    color: #335;
+    font-weight: 500;
+}
+
+.actionConfirmHolder p {
+    font-size: 1.5rem;
+}
+
+.actionConfirmHolder button {
+    padding: 0.5em;
+    margin-top: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+
+    border: none;
+    border-radius: 100px;
+    background-color: #6bf;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0px #59d;
+
+    transition: all 0.2s;
+}
+
+.actionConfirmHolder button:hover {
+    box-shadow: 0px 5px 0px 0px #59d;
+    transform: translateY(-5px);
+}
+
+.actionConfirmHolder button:active {
+    box-shadow: 0px 3px 0px 0px #59d;
+    transform: translateY(-3px);
+}

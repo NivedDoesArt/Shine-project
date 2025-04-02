@@ -21,7 +21,6 @@
         <ul id="navigation">
             <li onclick="window.scrollTo({top: 0, behavior:'smooth'})" id="activePage">Create</li>
             <li onclick="navbar('HTML/premade.html');">Pre-made</li>
-            <li onclick="navbar('HTML/contact.html');">Contact</li>
         </ul>
     </header>
 
@@ -37,10 +36,10 @@
 
             <h2 onclick="toggleNoteSelect(1, true)" id="capoSelector">Capo: none</h2>
             <h2 onclick="timeSigSelect()" id="timeSig">Time signature: 4/4</h2>
-            <h2 style="margin-top: 50px;" onclick="saveProject()">Save current</h2>
-            <h2 onclick="loadSave()">Load last</h2>
-            <h2 onclick="localStorage.clear(); databaseCheck(); loadSave()">Clear save</h2>
-            <h2>Empty tab</h2>
+            <h2 style="margin-top: 50px;" onclick="actionConfirm(1)">Save current</h2>
+            <h2 onclick="actionConfirm(2)">Load last</h2>
+            <h2 onclick="actionConfirm(3)">Clear save</h2>
+            <h2 onclick="actionConfirm(4)">Empty tab</h2>
         </div>
 
         <div id="contentRight">
@@ -53,27 +52,41 @@
                         <p id="selectedScale">E</p>
 
                         <div id="scaleDiv">
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale1">A</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale2">A#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale3">B</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale4">C</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale5">C#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale6">D</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale7">D#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale8" class="currentScale">E</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale9">F</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale10">F#</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale11">G</li>
-                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')" id="scale12">G#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale1">A</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale2">A#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale3">B</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale4">C</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale5">C#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale6">D</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale7">D#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale8" class="currentScale">E</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale9">F</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale10">F#</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale11">G</li>
+                            <li onclick="scaleSelect(this.id); toggleScaleMenu(); loadTab(this.id, 'temp', 'temp')"
+                                id="scale12">G#</li>
                         </div>
-                    </ul>    
+                    </ul>
 
                     <ul id="shapeUl" onclick="toggleShapeMenu()">
                         <p id="selectedShape">Standard</p>
 
                         <div id="shapeDiv">
-                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')" id="shape1" class="currentScale">Standard</li>
-                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')" id="shape2">Drop</li>
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')"
+                                id="shape1" class="currentScale">Standard</li>
+                            <li onclick="shapeSelect(this.id); toggleShapeMenu(); loadTab('temp', this.id, 'temp')"
+                                id="shape2">Drop</li>
                         </div>
                     </ul>
 
@@ -81,13 +94,20 @@
                         <p id="selectedString">6 strings</p>
 
                         <div id="stringDiv">
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)" id="string1">4 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)" id="string2">5 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)" id="string3" class="currentScale">6 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale3'); stringSelect(this.id); toggleStringMenu(); loadTab('scale3', 'shape1', this.id)" id="string4">7 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale10');stringSelect(this.id); toggleStringMenu(); loadTab('scale10', 'shape1', this.id)" id="string5">8 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale5');stringSelect(this.id); toggleStringMenu(); loadTab('scale5', 'shape1', this.id)" id="string6">9 strings</li>
-                            <li onclick="shapeSelect('shape1'); scaleSelect('scale12');stringSelect(this.id); toggleStringMenu(); loadTab('scale12', 'shape1', this.id)" id="string7">10 strings???</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)"
+                                id="string1">4 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)"
+                                id="string2">5 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale8');stringSelect(this.id); toggleStringMenu(); loadTab('scale8', 'shape1', this.id)"
+                                id="string3" class="currentScale">6 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale3'); stringSelect(this.id); toggleStringMenu(); loadTab('scale3', 'shape1', this.id)"
+                                id="string4">7 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale10');stringSelect(this.id); toggleStringMenu(); loadTab('scale10', 'shape1', this.id)"
+                                id="string5">8 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale5');stringSelect(this.id); toggleStringMenu(); loadTab('scale5', 'shape1', this.id)"
+                                id="string6">9 strings</li>
+                            <li onclick="shapeSelect('shape1'); scaleSelect('scale12');stringSelect(this.id); toggleStringMenu(); loadTab('scale12', 'shape1', this.id)"
+                                id="string7">10 strings???</li>
                         </div>
                     </ul>
 
@@ -113,6 +133,15 @@
         </div>
     </div>
 
+    <div id="actionConfirm" onclick="actionConfirm(0)">
+        <div class="actionConfirmHolder">
+            <h1 id="actConH1">Wait!</h1>
+            <p id="actConP">Are you sure you want to PLACEHOLDER?<br>Your save data may be altered</p>
+            <button id="actConButton1">Confirm</button>
+            <button id="actConButton2">Go back!</button>
+        </div>
+    </div>
+
 
 
     <footer>
@@ -120,7 +149,7 @@
             <img src="IMG/1.jpg" alt="Photo of me">
             <p>Heyo! My name is Devin de Wit,<br><br>I made this website as a school project in 2025. this is a
                 guitar/bass tab writing dedicated project. It would be a dream come true if people actually used this
-                haha!</p>
+                haha!<br><br>devin.de.wit@sintlucasedu.nl<br>+31 6 11397896<br>Netherlands</p>
         </div>
 
         <ul>
@@ -135,7 +164,8 @@
             <li onclick="window.open('https://niveddoesart.github.io/Portfolio/index.html')">Portfolio</li>
             <li onclick="window.open('https://x.com/DevindeWit')">Twitter</li>
             <li onclick="window.open('https://www.instagram.com/niveddoesart/')">Instagram</li>
-            <li onclick="window.open('https://open.spotify.com/artist/60RFmcnTpPnMJaoy3DQJb3?si=7b23c911bc19485a')">Spotify</li>
+            <li onclick="window.open('https://open.spotify.com/artist/60RFmcnTpPnMJaoy3DQJb3?si=7b23c911bc19485a')">
+                Spotify</li>
             <li onclick="window.open('https://github.com/NivedDoesArt/Shine-project')">Github</li>
         </ul>
     </footer>
