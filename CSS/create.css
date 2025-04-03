@@ -302,6 +302,15 @@
     background-color: #fff4;
 }
 
+.noteDot {
+    width: 5px;
+    height: 5px;
+    margin-top: -5px;
+
+    background-color: #fffb;
+    border-radius: 10px;
+}
+
 
 
 .stringButtonLayout {

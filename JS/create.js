@@ -377,7 +377,7 @@ function reloadStrings() {
     document.getElementById("noteSelectArea").innerHTML = ""
     const newString = document.getElementById("noteSelectArea").appendChild(document.createElement("div"))
     newString.setAttribute("class", "noteSelectString")
-    newString.style.marginTop = "1em"
+    newString.style.marginTop = "1.5em"
 
     const newStringCapo = newString.appendChild(document.createElement("div"))
     newStringCapo.setAttribute("id", "noteSelectStringCapo")
@@ -388,6 +388,23 @@ function reloadStrings() {
         newNote.setAttribute("class", "noteSelect")
         newNote.setAttribute("id", "noteSelect" + x)
         newNote.setAttribute("onClick", "noteSelect(this.innerHTML)")
+
+        // dots for the guitar neck
+        if (x == 1 || x == 3 || x == 5 || x == 7 || x == 9 || x == 15 || x == 17 || x == 19 || x == 21) {
+            const noteDot = newNote.appendChild(document.createElement("div"))
+            noteDot.setAttribute("class", "noteDot")
+            noteDot.style.transform = "translateX(" + (newNote.offsetWidth / 2 - 2.5) + "px) translateY(-37px)"
+        }
+
+        if (x == 12 || x == 24) {
+                const noteDot1 = newNote.appendChild(document.createElement("div"))
+                noteDot1.setAttribute("class", "noteDot noteDotL")    
+                noteDot1.style.transform = "translateX(" + (newNote.offsetWidth / 2 - 2.5) + "px) translateY(-32px)"
+
+                const noteDot2 = newNote.appendChild(document.createElement("div"))
+                noteDot2.setAttribute("class", "noteDot noteDotR")    
+                noteDot2.style.transform = "translateX(" + (newNote.offsetWidth / 2 - 2.5) + "px) translateY(-42px)"
+        }
     }
 
 
