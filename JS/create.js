@@ -1503,7 +1503,7 @@ function actionConfirm(confirm) {
     if (confirm == 5) {
         document.getElementById("actConP").innerHTML = "We found a previous save file!<br>Would you like to load it up?<br>This can also be done at any time"
         document.getElementById("actConButton1").setAttribute("onclick", 'loadSave()')
-        document.getElementById("actConButton2").setAttribute("onclick", 'userStorage = ["none", 0, "scale8", "shape1", "string3", 1]; loadTab()')
+        document.getElementById("actConButton2").setAttribute("onclick", 'userStorage = ["none", 0, "scale8", "shape1", "string3", 1]; rowAmount = 1; loadTab()')
     }
 
 
