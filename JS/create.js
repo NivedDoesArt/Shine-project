@@ -76,7 +76,10 @@ function databaseCheck() {
             capoValue = "none"
 
         } else {
-            actionConfirm(5)
+            if (localStorage.getItem("userStorage") != "none,0,scale8,shape1,string3,1") {
+                actionConfirm(5)
+            }
+
             console.log("Existing database found:")
             console.log(localStorage.getItem("userStorage").split(","))
             capoValue = localStorage.getItem("userStorage").split(",")[0]
@@ -973,6 +976,10 @@ addEventListener("keydown", (event) => {
     if (event.key == "`" || event.key == "~") {
         noteSelect("~")
     }
+});
+
+addEventListener('resize', (event) => {
+    reloadStrings()
 });
 
 
