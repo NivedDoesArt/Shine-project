@@ -68,6 +68,7 @@ function databaseCheck() {
 
     } else {
         if (localStorage.getItem("userStorage") == null) {
+            actionConfirm(0)
             console.log("Creating new database")
 
             tempStorage = ["none", 0, "scale8", "shape1", "string3", 1]
@@ -75,6 +76,7 @@ function databaseCheck() {
             capoValue = "none"
 
         } else {
+            actionConfirm(5)
             console.log("Existing database found:")
             console.log(localStorage.getItem("userStorage").split(","))
             capoValue = localStorage.getItem("userStorage").split(",")[0]
@@ -1417,7 +1419,6 @@ async function loadSave() {
 
     currentlySaving = false
 }
-loadSave()
 
 
 
@@ -1490,13 +1491,18 @@ function actionConfirm(confirm) {
         location.hash = 0
     }
 
+    if (confirm == 5) {
+        document.getElementById("actConP").innerHTML = "We found a previous save file!<br>Would you like to load it up?<br>This can also be done at any time"
+        document.getElementById("actConButton1").setAttribute("onclick", 'loadSave()')
+        document.getElementById("actConButton2").setAttribute("onclick", 'userStorage = ["none", 0, "scale8", "shape1", "string3", 1]; loadTab()')
+    }
+
 
 
     if (confirm == 0) {
         // close
         document.getElementById("actionConfirm").style.opacity = "0%"
         document.getElementById("actionConfirm").style.zIndex = "-1"
+        document.getElementById("actConButton2").removeAttribute("onclick")
     }
 }
-
-actionConfirm(0)
