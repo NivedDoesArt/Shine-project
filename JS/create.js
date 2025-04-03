@@ -88,6 +88,8 @@ function databaseCheck() {
             }
         }
     }
+
+    loadSave()
 }
 databaseCheck()
 
