@@ -18,6 +18,10 @@
     font-weight: 600;
 }
 
+#contentLeftScroll {
+    transition: all 0.5s;
+}
+
 #contentLeft h2 {
     margin: 0.5em;
     margin-left: 20%;
@@ -89,8 +93,6 @@
     width: 70%;
 
     color: #335;
-
-    transition: all 0.75s;
 }
 
 #settingsBar {
@@ -283,7 +285,7 @@
 }
 
 .noteSelect {
-    width: calc((100% / 25) - 4px);
+    width: calc((100vw - 20vw) / 30);
     height: fit-content;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -294,6 +296,7 @@
     border: none;
     color: #fff;
     cursor: pointer;
+    text-align: center;
 
     transition: all 0.2s;
 }
@@ -322,7 +325,7 @@
 }
 
 .stringButtonHolder {
-    width: calc(100% / 10);
+    width: calc(100% / 12);
     height: fit-content;
     padding-top: 4px;
     padding-bottom: 4px;
